@@ -195,7 +195,7 @@ function loop() {
 }
 
 function render() { 
-	
+
 	var c = context; 
 	
 	//c.fillStyle="rgba(0,0,0, 0.4)";
@@ -242,105 +242,13 @@ function render() {
 	// 	c.stroke(); 
 	
 	
-	if(touchable && (gameState== PLAYING)) {
-		//touchController.render(context);	
-		
-		if(touchController.active) { 
-		
-			context.strokeStyle = 'white'; 
-			context.lineWidth = 1; 
-		
-		
-			// draws the thrust controls
-			var rightX = SCREEN_WIDTH*0.9; 
-			if(touchController.rightTouch.getX()!=0) { 
-				context.beginPath(); 
-				context.moveTo(SCREEN_HEIGHT*touchThrustBottom, rightX); 
-				context.lineTo(SCREEN_HEIGHT*touchThrustTop, rightX); 
-				for(var i = 0; i<=20;i++) { 
-					context.moveTo(rightX-5, map(i, 0, 20, SCREEN_HEIGHT*touchThrustBottom, SCREEN_HEIGHT*touchThrustTop));
-					context.lineTo(rightX+5, map(i, 0, 20, SCREEN_HEIGHT*touchThrustBottom, SCREEN_HEIGHT*touchThrustTop));
-				}
-				
-			//	if(touchController.rightTouch.touching) { 
-				
-				var indicatorY = map(lander.thrustLevel, 1,0, SCREEN_HEIGHT*touchThrustTop,SCREEN_HEIGHT*touchThrustBottom);
-				context.moveTo(rightX-SCREEN_WIDTH*0.1, indicatorY);
-				context.lineTo(rightX-5, indicatorY);
-				context.moveTo(rightX-5, indicatorY-5);
-				context.lineTo(rightX-5, indicatorY+5);
-				
-				 
-				context.stroke(); 
-				
-				
-				//context.strokeRect(rightX-SCREEN_WIDTH*0.04, map(0.5, 0,1, SCREEN_HEIGHT*touchThrustTop,SCREEN_HEIGHT*touchThrustBottom), SCREEN_WIDTH*0.08,SCREEN_HEIGHT*0.05); 
-				context.beginPath(); 
-				context.arc(rightX-SCREEN_WIDTH*0.12, indicatorY, SCREEN_WIDTH*0.01, 0, Math.PI*2, true); 
-				context.stroke();
-			//	}
-				
-				
-			}
-			
-			//draws rotation controls 
-			if(touchController.leftTouch.getX()!=0) { 
-				
-				if(touchController.leftTouch.touching) rotateDialBrightness = 100; 
-				else rotateDialBrightness *=0.95; 
-				context.beginPath(); 
-				context.strokeStyle = "hsl(0,0%,"+rotateDialBrightness+"%)"; 
-				
-				for(var i= -180; i<=0; i+=10) { 
-					
-					context.save(); 
-					context.translate(touchController.leftTouch.getX(), touchController.leftTouch.getY()); 
-					context.rotate(i*Math.PI/180); 
-					context.moveTo(55,0); 
-					context.lineTo(60,0); 
-					context.restore(); 
-					
-				}
-				
-				context.save(); 
-				context.translate(touchController.leftTouch.getX(), touchController.leftTouch.getY());
-				
-				
-				context.moveTo(80,-10); 
-				context.lineTo(90,0); 
-				context.lineTo(80,10); 
-				context.closePath(); 
-				
-				context.moveTo(-80,-10); 
-				context.lineTo(-90,0); 
-				context.lineTo(-80,10); 
-				context.closePath(); 
-				
-				context.rotate((lander.rotation-90)*Math.PI/180); 
-			
-				context.moveTo(70,-7); 
-				context.lineTo(77,0); 
-				context.lineTo(70,7); 
-				context.closePath(); 
-
-
-				
-				
-				context.restore();
-				
-				
-				context.stroke(); 
-					
-					
-				
-				
-			}
+	
 			
 			
 			
 			
-		}
-	}
+	
+	
 }
 
 function checkKeys() { 
