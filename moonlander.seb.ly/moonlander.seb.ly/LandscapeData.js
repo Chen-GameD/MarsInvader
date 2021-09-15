@@ -14,8 +14,22 @@ function Landscape(){
 		
 	setupData(); 
 
+	var maxRanderHeight = 720;
+	const tile = new Image();
+	tile.src = "assets/test.png";
+	var tile_width = 0;
+	var tile_height = 0;
+	tile.onload = function(){
+		console.log(tile.width);
+		tile_width = points[points.length - 1].x - points[0].x;
+		tile_height = tile.height;
+		console.log(tile_width, tile_height);
+	}
+	
+
 
 	rightedge = this.tileWidth = points[points.length - 1].x * landscale ;
+	console.log(rightedge);
 	
 	for (var i = 0; i<points.length; i++){
 		var p = points[i];
@@ -45,8 +59,24 @@ function Landscape(){
 			if((star.y < line.p1.y) && (star.y < line.p2.y)) {
 				stars.push(star);
 			}
+
+			//drawTile
+			//var tanAngle = (line.p2.y - line.p1.y) / (line.p2.x - line.p1.x);
+			//for (var x = line.p1.x; x < line.p2.x; x += tile_width)
+			//{
+				//if (x + tile_width > line.p2.x)
+				//{
+					//reach the boundary
+					//x = line.p2.x - tile_width;
+				//}
+				//for (var y = line.p1.y - tanAngle * (x - line.p1.x); y <= maxRanderHeight; y += tile_height)
+				//{
+					//c.drawImage(tile, x, y);
+					//console.log(x, y);
+				//}
+			//}
 		}
-	}	
+	}
 
 		
 	//	var pointcount = points.length;
@@ -80,8 +110,14 @@ function Landscape(){
 		}
 		
 		c.beginPath(); 
+
+		//for (var h = lines[0].p1.y; h <= maxRanderHeight; h += tile_height)
+		//{
+			//c.drawImage(tile, lines[0].p1.x, h);
+		//}
 		
 		var line = lines[i];
+
 		var offsetY = 0; 
 		if(Math.random()<0.3) { 
 			offset+=(0.2/view.scale); 
@@ -117,9 +153,7 @@ function Landscape(){
 			if(i>=lines.length) {
 				i=0; 
 				offset+=rightedge; 
-			}
-			
-	
+			}		
 		}
 		
 		var flickerAmount = Math.sin(counter*0.8)*0.5 + 0.5; 
@@ -141,6 +175,12 @@ function Landscape(){
 		
 		for(var i=zoneInfoIndex; i<zoneInfos.length; i++) { 
 			zoneInfos[i].hide(); 
+		}
+
+		console.log(0, startOffset, offset);
+		for (var fillOffset = startOffset; fillOffset <= offset; fillOffset += rightedge)
+		{
+			c.drawImage(tile, fillOffset, 0, tile_width, tile_height);
 		}
 		
 		
