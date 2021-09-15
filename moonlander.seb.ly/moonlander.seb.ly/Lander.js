@@ -81,7 +81,7 @@ Lander = function() {
 	
 	this.thrust = function (power) { 
 		this.thrusting = power; 
-		console.log("hh"+power);
+		
 		//this.thrustBuild = power; 
 		
 	};
@@ -94,7 +94,18 @@ Lander = function() {
 			lastAbort = now; 
 		} 
 	}
-	
+	//drop a bomb
+	this.shoot = function(){
+
+		if(missiles.length == 0){
+			missiles[0] = new Missile(vel.x, vel.y, pos.x, pos.y);
+		}else if(missiles.length == 1){
+			missiles[1] = new Missile(vel.x, vel.y, pos.x, pos.y);
+		}
+		
+		
+	}
+
 	this.update = function() { 
 	
 		counter++; 
@@ -191,12 +202,7 @@ Lander = function() {
 		
 		c.restore(); 
 		
-		// c.beginPath(); 
-		// 	c.moveTo(bottomLeft.x, bottomLeft.y); 
-		// 	c.lineTo(bottomRight.x, bottomRight.y); 
-		// 	c.stroke(); 
-		// 	
-		this.colour = 'white'; 
+		
 		 
 	};
 	this.crash = function () { 
