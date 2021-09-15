@@ -1,4 +1,4 @@
-function InfoDisplay(width, height) { 
+function UIDisplay(width, height) { 
 
 	var dom = this.domElement = document.createElement('div'); 
 	var s = dom.style; 

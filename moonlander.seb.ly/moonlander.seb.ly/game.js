@@ -5,7 +5,6 @@ var SCREEN_WIDTH = window.innerWidth,
 	HALF_WIDTH = window.innerWidth / 2,
 	HALF_HEIGHT = window.innerHeight / 2, 
 	touchable = "ontouchstart" in window, 
-	touchController, 
 	touchThrustTop = 0.25, 
 	touchThrustBottom = 0.9,
 	touchRotateRange = 0.2,
@@ -27,8 +26,7 @@ var SCREEN_WIDTH = window.innerWidth,
 	lastMouseMove = Date.now(), 
 	lastMouseHide =0, 
 	mouseHidden = false; 
-	
-	if(touchable) touchController= new TouchController();
+
 // game states
 var	WAITING = 0, 
 	PLAYING = 1, 
@@ -79,7 +77,7 @@ function init()
 	
 	document.body.appendChild(canvas); 
 	
-	infoDisplay = new InfoDisplay(SCREEN_WIDTH, SCREEN_HEIGHT); 
+	infoDisplay = new UIDisplay(SCREEN_WIDTH, SCREEN_HEIGHT); 
 	document.body.appendChild(infoDisplay.domElement); 
 	
 	canvas.width = SCREEN_WIDTH; 
@@ -140,39 +138,7 @@ function loop() {
 	}
 	
 	if(gameState == PLAYING) { 
-		
-		
 		checkKeys(); 
-		if(touchable) { 
-			if(touchController.rightTouch.touching) { 
-				//console.log(touchController.rightTouch.getY()); 
-				//console.log(map(touchController.rightTouch.getY(), SCREEN_HEIGHT*touchThrustBottom, SCREEN_HEIGHT*touchThrustTop));
-				lander.thrust(map(touchController.rightTouch.getY(), SCREEN_HEIGHT*touchThrustBottom, SCREEN_HEIGHT*touchThrustTop, 0,1,true)); 
-			} else { 
-				lander.thrust(0); 
-			}
-			
-			if(touchController.leftTouch.touching) { 
-				
-				if(!touchRotate) {
-					touchRotate = true; 
-					touchRotateStartAngle = lander.rotation; 
-				}
-//				console.log(map(touchController.leftTouch.getX(), SCREEN_WIDTH*touchRotateLeft, SCREEN_WIDTH*touchRotateRight, -90,90,true));
-				var touchAngle = map(touchController.leftTouch.getXOffset(), SCREEN_WIDTH*touchRotateRange*-0.5, SCREEN_WIDTH*touchRotateRange*0.5, -90,90);
-				touchAngle +=touchRotateStartAngle; 
-				
-				
-				lander.setRotation(touchAngle);  
-				
-			} else { 
-				touchRotate = false; 
-			}
-			
-		
-			
-			
-		}
 	}
 
 	lander.update(); 
