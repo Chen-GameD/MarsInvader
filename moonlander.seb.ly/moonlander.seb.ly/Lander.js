@@ -19,9 +19,9 @@ Lander = function() {
 		abortCounter = -1;  
 	
 	this.socketImg = new Image();
-	this.socketImg.src="resources/socket.png";
+	this.socketImg.src="assets/SpaceXShuttle/socket.png";
 	this.socket_noflameImg = new Image();
-	this.socket_noflameImg.src = "resources/socket_noflame.png"
+	this.socket_noflameImg.src = "assets/SpaceXShuttle/socket_noflame.png"
 	this.rotation = 0; 
 	this.thrusting = 0;
 	this.altitude = 0;
