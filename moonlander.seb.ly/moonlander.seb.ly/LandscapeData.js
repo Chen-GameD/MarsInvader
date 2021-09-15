@@ -10,7 +10,9 @@ function Landscape(){
 		zoneInfos = [], 
 		landscale = 1.5, 
 		rightedge, 
-		flickerProgress = 0;
+		flickerProgress = 0,
+		fillOff = 140;
+		fillof = 335;
 		
 	setupData(); 
 
@@ -22,7 +24,7 @@ function Landscape(){
 	tile.onload = function(){
 		console.log(tile.width);
 		tile_width = points[points.length - 1].x - points[0].x;
-		tile_height = tile.height;
+		tile_height = tile.height * (tile_width / tile.width);
 		console.log(tile_width, tile_height);
 	}
 	
@@ -130,6 +132,7 @@ function Landscape(){
 		while((line = lines[i]).p1.x+offset<view.right) { 
 			
 			var point = line.p2; 
+			
 			c.lineTo(point.x+offset, point.y);
 			
 			if((counter%20>10) && (line.multiplier!=1)){ 
@@ -180,7 +183,7 @@ function Landscape(){
 		console.log(0, startOffset, offset);
 		for (var fillOffset = startOffset; fillOffset <= offset; fillOffset += rightedge)
 		{
-			c.drawImage(tile, fillOffset, 0, tile_width, tile_height);
+			c.drawImage(tile, fillOffset - fillOff, fillof, tile_width + 1, tile_height);
 		}
 		
 		
