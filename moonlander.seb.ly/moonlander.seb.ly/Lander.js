@@ -18,6 +18,10 @@ Lander = function() {
 		counter = 0, 
 		abortCounter = -1;  
 	
+	this.socketImg = new Image();
+	this.socketImg.src="resources/socket.png";
+	this.socket_noflameImg = new Image();
+	this.socket_noflameImg.src = "resources/socket_noflame.png"
 	this.rotation = 0; 
 	this.thrusting = 0;
 	this.altitude = 0;
@@ -77,7 +81,7 @@ Lander = function() {
 	
 	this.thrust = function (power) { 
 		this.thrusting = power; 
-		
+		console.log("hh"+power);
 		//this.thrustBuild = power; 
 		
 	};
@@ -152,7 +156,7 @@ Lander = function() {
 	
 	this.render = function(c, scale) { 
 		c.save(); 
-		scale = 0.5;
+		
 		
 		c.translate(pos.x, pos.y); 
 		c.scale(this.scale, this.scale); 
@@ -160,20 +164,27 @@ Lander = function() {
 		c.rotate(this.rotation * TO_RADIANS); 
 		c.strokeStyle = this.colour; 
 	
-		var img = new Image();
-		img.src = "resources/soket.png";
-		img.width = "200";
-		img.height = "200";
-		c.drawImage(img,-10, -10,20,35);
+	
 		
-		//c.beginPath(); 
+		c.drawImage(this.socket_noflameImg,-11, -16,20,33);
+		c.fillStyle = "red";
+		c.strokeStyle = "black";
+		c.beginPath(); 
 		
-		//this.renderShapes(c);
+		// this.renderShapes(c); 
+		c.moveTo(-8,11);
 		
-		// if((thrustBuild>0) && (this.active)) {
-		// 	c.lineTo(0,11+(Math.min(thrustBuild,1)*20*((((counter>>1)%3)*0.2)+1)));
-		// 	c.closePath(); 
-		// }	
+		if((thrustBuild>0) && (this.active)) {
+			c.lineTo(0,11+(Math.min(thrustBuild,1)*20*((((counter>>1)%3)*0.2)+1)));
+		    c.lineTo(8,11);
+			c.closePath();
+			
+			
+			c.fill();
+		}
+
+		
+		
 		
 		
 		c.stroke(); 
