@@ -165,7 +165,7 @@ Lander = function() {
 		c.strokeStyle = this.colour; 
 	
 	
-		
+		//test git
 		c.drawImage(this.socket_noflameImg,-11, -16,20,33);
 		c.fillStyle = "red";
 		c.strokeStyle = "black";
