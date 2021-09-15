@@ -47,7 +47,8 @@ var	WAITING = 0,
 	lander = new Lander(),
 	landscape = new Landscape(), 
 	testPoints = [],
-	
+	//missiles
+	missiles = [],
 // canvas element and 2D context
 	canvas = document.createElement( 'canvas' ),
 	context = canvas.getContext( '2d' ),
@@ -99,6 +100,8 @@ function init()
 	
 	KeyTracker.addKeyDownListener(KeyTracker.UP, function() { if(gameState==PLAYING) lander.thrust(1);});
 	KeyTracker.addKeyUpListener(KeyTracker.UP, function() { lander.thrust(0);});
+	
+	KeyTracker.addKeyDownListener(KeyTracker.DOWN, function() { if(gameState==PLAYING) lander.shoot();});
 	
 	
 
@@ -198,6 +201,11 @@ function loop() {
 	
 	while(elapsedFrames > counter) {
 		lander.update(); 
+		for(i = 0; i < missiles.length; i++){
+			if(missiles[i].active){
+				missiles[i].update();
+			}
+		}
 		if((counter%6)==0){
 			sendPosition(); 
 
@@ -256,6 +264,11 @@ function loop() {
 	}
 
 	lander.update(); 
+	for(i = 0; i < missiles.length; i++){
+		if(missiles[i].active){
+			missiles[i].update();
+		}
+	}
 	if((counter%6)==0){
 		sendPosition(); 
 	
@@ -309,7 +322,11 @@ function render() {
 
 	landscape.render(context, view);
 	lander.render(context, view.scale);
-		
+	for(i = 0; i < missiles.length; i++){
+		if(missiles[i].active){
+			missiles[i].render(context, view.scale);
+		}
+	}	
 	// for(var i =0; i<testPoints.length; i++) { 
 	// 		c.fillRect(testPoints[i].x, testPoints[i].y, 1,1); 		
 	// 	}
@@ -506,6 +523,7 @@ function scheduleRestart() {
 }
 function restartLevel() { 
 	lander.reset(); 
+	missiles = [];
 	landscape.setZones(); 
 	setZoom(false); 
 	
@@ -537,12 +555,12 @@ function checkCollisions() {
 		
 	for(var i=0; i<lines.length; i++ ) { 
 		line = lines[i]; 
-		line.checked = false; 
+		
 		// if the ship overlaps this line
 		if(!((right<line.p1.x) || (left>line.p2.x))){ 
 		
 			lander.altitude = line.p1.y-lander.bottom; 
-				line.checked = true;
+				
 			
 			// if the line's horizontal 
 			if(line.landable) { 
@@ -573,6 +591,25 @@ function checkCollisions() {
 						pointIsLessThanLine(lander.bottomRight, line.p1, line.p2)) {
 				
 					setCrashed(); 
+				}
+			}
+
+			
+			
+			
+			
+		}
+
+		//missile boom
+		for(j = 0; j < missiles.length; j++){
+			var missile = missiles[j];
+			if(missile.active){
+				
+				if(missile.pos.x+0>line.p1.x && missile.pos.x+0 < line.p2.x){
+					if(missile.pos.y+5 > line.p1.y || missile.pos.y+5 > line.p2.y){
+						//boom
+						missile.crash();
+					}
 				}
 			}
 		}
@@ -640,6 +677,9 @@ function setZoom(zoom )
 		view.x = -lander.pos.x * view.scale + (SCREEN_WIDTH / 2);
 		view.y = -lander.pos.y * view.scale + (SCREEN_HEIGHT * 0.25);
 		lander.scale = 0.25;
+		for(i = 0; i < missiles.length; i++){
+			missiles[i].scale = 0.25;
+		}
 	
 	} 
 	else {
@@ -647,6 +687,9 @@ function setZoom(zoom )
 		view.scale = SCREEN_HEIGHT/700;
 		zoomedIn = false;
 		lander.scale = 0.6;
+		for(i = 0; i < missiles.length; i++){
+			missiles[i].scale = 0.6;
+		}
 		view.x = 0;
 		view.y = 0;
 	}
