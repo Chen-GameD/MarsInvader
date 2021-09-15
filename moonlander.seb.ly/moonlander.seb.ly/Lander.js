@@ -152,23 +152,30 @@ Lander = function() {
 	
 	this.render = function(c, scale) { 
 		c.save(); 
+		scale = 0.5;
 		
 		c.translate(pos.x, pos.y); 
 		c.scale(this.scale, this.scale); 
 		c.lineWidth = 1/(this.scale * scale); 
 		c.rotate(this.rotation * TO_RADIANS); 
 		c.strokeStyle = this.colour; 
+	
+		var img = new Image();
+		img.src = "resources/soket.png";
+		img.width = "200";
+		img.height = "200";
+		c.drawImage(img,-10, -10,20,35);
 		
-		c.beginPath(); 
+		//c.beginPath(); 
 		
-		this.renderShapes(c);
+		//this.renderShapes(c);
 		
-		if((thrustBuild>0) && (this.active)) {
-			c.lineTo(0,11+(Math.min(thrustBuild,1)*20*((((counter>>1)%3)*0.2)+1)));
-			c.closePath(); 
-		}	
+		// if((thrustBuild>0) && (this.active)) {
+		// 	c.lineTo(0,11+(Math.min(thrustBuild,1)*20*((((counter>>1)%3)*0.2)+1)));
+		// 	c.closePath(); 
+		// }	
 		
-			
+		
 		c.stroke(); 
 		
 		c.restore(); 
