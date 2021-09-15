@@ -49,9 +49,6 @@ function Landscape(){
 
 	
 	// make stars... 
-	
-	
-	
 	for(var i = 0;i < lines.length;i++)	{
 		if(Math.random() < 0.1) {
 			var line  = lines[i];
@@ -61,31 +58,8 @@ function Landscape(){
 			if((star.y < line.p1.y) && (star.y < line.p2.y)) {
 				stars.push(star);
 			}
-
-			//drawTile
-			//var tanAngle = (line.p2.y - line.p1.y) / (line.p2.x - line.p1.x);
-			//for (var x = line.p1.x; x < line.p2.x; x += tile_width)
-			//{
-				//if (x + tile_width > line.p2.x)
-				//{
-					//reach the boundary
-					//x = line.p2.x - tile_width;
-				//}
-				//for (var y = line.p1.y - tanAngle * (x - line.p1.x); y <= maxRanderHeight; y += tile_height)
-				//{
-					//c.drawImage(tile, x, y);
-					//console.log(x, y);
-				//}
-			//}
 		}
 	}
-
-		
-	//	var pointcount = points.length;
-
-		//var dirtyRectangles = []; 
-
-	
 	
 	var render = this.render = function(c, view) { 
 
@@ -112,11 +86,6 @@ function Landscape(){
 		}
 		
 		c.beginPath(); 
-
-		//for (var h = lines[0].p1.y; h <= maxRanderHeight; h += tile_height)
-		//{
-			//c.drawImage(tile, lines[0].p1.x, h);
-		//}
 		
 		var line = lines[i];
 
