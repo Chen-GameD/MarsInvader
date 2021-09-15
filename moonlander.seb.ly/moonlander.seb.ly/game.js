@@ -54,8 +54,6 @@ var	WAITING = 0,
 
 // to store the current x and y mouse position
 	mouseX = 0, mouseY = 0, 
-	
-	stats = new Stats(),
 
 // to convert from degrees to radians, 
 // multiply by this number!
@@ -77,14 +75,9 @@ window.addEventListener("load", init);
 
 function init() 
 {
-	initWebSocket(); 
 	// CANVAS SET UP
 	
 	document.body.appendChild(canvas); 
-	
-	stats.domElement.style.position = 'absolute';
-	stats.domElement.style.top = (SCREEN_HEIGHT-45)+'px';
-	//document.body.appendChild( stats.domElement );
 	
 	infoDisplay = new InfoDisplay(SCREEN_WIDTH, SCREEN_HEIGHT); 
 	document.body.appendChild(infoDisplay.domElement); 
@@ -111,71 +104,6 @@ function init()
 	loop();
 	
 }
-
-
-function sendPosition() {
-
-	if(gameState==PLAYING) {
-		var update = {
-			type : 'update', 
-			id : wsID, 
-			x : Math.round(lander.pos.x*100), 
-			y : Math.round(lander.pos.y*100), 
-			a : Math.round(lander.rotation), 
-			t : lander.thrusting 
-		};
-					
-		sendObject(update); 
-
-	}
-}
-
-function sendLanded() { 
-
-	var update = {
-		type : 'land', 
-		x : Math.round(lander.pos.x*100), 
-		y : Math.round(lander.pos.y*100),
-		id : wsID
-	};
-	sendObject(update); 
-}
-	
-function sendCrashed() { 
-
-	var update = {
-		type : 'crash', 
-		x : Math.round(lander.pos.x*100), 
-		y : Math.round(lander.pos.y*100), 
-		id : wsID	
-	};
-	sendObject(update); 
-}
-function sendGameOver() { 
-
-	var update = {
-		type : 'over', 
-		x : Math.round(lander.pos.x*100), 
-		y : Math.round(lander.pos.y*100), 
-		id : wsID,
-		sc : score
-	};
-	sendObject(update); 
-}
-function sendRestart() { 
-	var update = {
-		type : 'restart', 
-		id : wsID,
-		sc : score
-	};
-	sendObject(update); 
-	sendLocation();
-}
-	
-
-
-//
-
 	
 function loop() {
 	requestAnimationFrame(loop);
@@ -198,11 +126,6 @@ function loop() {
 	
 	while(elapsedFrames > counter) {
 		lander.update(); 
-		if((counter%6)==0){
-			sendPosition(); 
-
-		}
-		
 		
 		counter++; 
 	
@@ -215,9 +138,6 @@ function loop() {
 		
 
 	}
-
-	//stats.update(); 
-
 	
 	if(gameState == PLAYING) { 
 		
@@ -256,10 +176,6 @@ function loop() {
 	}
 
 	lander.update(); 
-	if((counter%6)==0){
-		sendPosition(); 
-	
-	}
 	
 	if((gameState == WAITING) && (lander.altitude<100) ) {
 		gameState=GAMEOVER;
@@ -512,7 +428,6 @@ function setLanded(line) {
 	if(singlePlayMode) {
 		setGameOver();
 	}
-	sendLanded();
 	scheduleRestart(); 
 }
 
@@ -524,8 +439,6 @@ function setCrashed() {
 	
 	var fuellost = Math.round(((Math.random() * 200) + 200));
 	lander.fuel -= fuellost;
-
-	sendCrashed();  
 	
 	if(lander.fuel<1) { 
 		setGameOver(); 
@@ -564,7 +477,6 @@ function setCrashed() {
 function setGameOver() { 
 	
 		gameState = GAMEOVER; 
-		sendGameOver();
 }
 
 function onMouseDown(e) {
@@ -609,7 +521,6 @@ function restartLevel() {
 		//initGame(); 
 	} else {
 		gameState = PLAYING; 
-		sendRestart(); 
 		infoDisplay.hideGameInfo();
 	}
 	
@@ -808,7 +719,6 @@ function resizeGame (event) {
 	SCREEN_HEIGHT = canvas.height = newHeight; 
 	
 	setZoom(zoomedIn) ;
-	stats.domElement.style.top = (SCREEN_HEIGHT-45)+'px';
 	infoDisplay.arrangeBoxes(SCREEN_WIDTH, SCREEN_HEIGHT); 
 
 }
