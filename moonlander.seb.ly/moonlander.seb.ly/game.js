@@ -89,8 +89,8 @@ function init()
 	document.body.addEventListener('mousemove', onMouseMove);
 	document.body.addEventListener('touchstart', onTouchStart);
 	
-	KeyTracker.addKeyDownListener(KeyTracker.UP, function() { if(gameState==PLAYING) lander.thrust(1);});
-	KeyTracker.addKeyUpListener(KeyTracker.UP, function() { lander.thrust(0);});
+	KeyTracker.addKeyDownListener(KeyTracker.UP, function() { if(gameState==PLAYING) {lander.isthrusting = true;lander.thrust(1);}});
+	KeyTracker.addKeyUpListener(KeyTracker.UP, function() {lander.isthrusting = false; lander.thrust(0);});
 	
 	KeyTracker.addKeyDownListener(KeyTracker.DOWN, function() { if(gameState==PLAYING) lander.shoot();});
 	

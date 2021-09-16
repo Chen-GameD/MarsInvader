@@ -17,7 +17,7 @@ Lander = function() {
 		lastRotationTime = 0, 
 		counter = 0, 
 		abortCounter = -1;  
-	
+	this.isthrusting = false;
 	this.socketImg = new Image();
 	this.socketImg.src="assets/SpaceXShuttle/socket.png";
 	this.socket_noflameImg = new Image();
@@ -176,21 +176,15 @@ Lander = function() {
 	
 	
 		//test git
-		c.drawImage(this.socket_noflameImg,-11, -16,20,33);
+		
 		c.fillStyle = "red";
 		c.strokeStyle = "black";
-		c.beginPath(); 
+	
+		if((this.isthrusting) && (this.active)) {
 		
-		// this.renderShapes(c); 
-		c.moveTo(-8,11);
-		
-		if((thrustBuild>0) && (this.active)) {
-			c.lineTo(0,11+(Math.min(thrustBuild,1)*20*((((counter>>1)%3)*0.2)+1)));
-		    c.lineTo(8,11);
-			c.closePath();
-			
-			
-			c.fill();
+			c.drawImage(this.socketImg,-11, -16,20,33);
+		} else {
+			c.drawImage(this.socket_noflameImg,-11, -16,20,33);
 		}
 
 		
