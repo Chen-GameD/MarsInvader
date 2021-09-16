@@ -58,9 +58,6 @@ function UIDisplay(width, height) {
 			vSpace = 20, 
 			column2Left = leftMargin+((SCREEN_WIDTH<650)?46:80), 
 			column3Left = rightMargin- ((SCREEN_WIDTH<650)?160:280);  
-			
-			//console.log(column3Left); 
-			
 		
 		scoreLabel.setX(leftMargin);
 		timeLabel.setX(leftMargin);
@@ -148,17 +145,8 @@ function UIDisplay(width, height) {
 		secs = Math.floor(value/1000); 
 		mins = Math.floor(secs/60);
 		secs = secs%60; 
-		if(secs<10) secs = "0"+secs; 
-				//  
-				// 	
-				// if(padding>0) { 
-				// 	value = ''+value;
-				// 	while((value.length===undefined) || (value.length<padding)) {
-				// 		value = '0'+value; 
-				// 	}
-				// 	
-				// }
-				// 	
+		if(secs<10) 
+			secs = "0"+secs; 
 		this[boxname].setText(mins+":"+secs); 
 		
 		

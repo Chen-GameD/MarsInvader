@@ -21,7 +21,7 @@ var SCREEN_WIDTH = window.innerWidth,
 	startKey = ' ',
 	selectKey = '', 
 	abortKey = '',
-	startMessage = "INSERT COINS<br><br>CLICK TO PLAY<br>ARROW KEYS TO MOVE", 
+	startMessage = "Welcome to Mars Invader<br><br>CLICK TO PLAY<br>ARROW KEYS TO MOVE", 
 	singlePlayMode = false, // for arcade machine  
 	lastMouseMove = Date.now(), 
 	lastMouseHide =0, 
@@ -324,8 +324,6 @@ function setCrashed() {
 	infoDisplay.showGameInfo(msg);
 	
 	scheduleRestart(); 
-	
-	samples.explosion.play(); 
 }
 
 
@@ -496,7 +494,6 @@ function updateTextInfo() {
 			} else {
 				playBeep = infoDisplay.showGameInfo("Low on fuel");
 			} 
-			if(playBeep) samples.beep.play(); 
 		} else {
 			infoDisplay.hideGameInfo(); 
 		}

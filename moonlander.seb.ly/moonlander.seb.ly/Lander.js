@@ -159,7 +159,6 @@ Lander = function() {
 			
 		}
 		if(this.fuel<0) this.fuel = 0; 
-		setThrustVolume(Math.min(1,thrustBuild)); 
 		
 		this.thrustLevel = thrustBuild;
 		
