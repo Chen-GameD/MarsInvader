@@ -114,7 +114,7 @@ function Landscape(){
 					infoBox = zoneInfos[zoneInfoIndex]; 
 					infoBox.show(); 
 				}
-				infoBox.setText(line.multiplier+'x'); 
+				//infoBox.setText(line.multiplier+'x'); 
 				infoBox.setX(((((line.p2.x-line.p1.x)/2)+line.p1.x+offset)*view.scale)+view.x); 
 				infoBox.setY(((line.p2.y+2) *view.scale)+view.y); 
 				zoneInfoIndex++; 
@@ -195,25 +195,6 @@ function Landscape(){
 		}		
 		
 		c.stroke(); 
-		
-		
-		//code to check landable... 
-		// c.beginPath(); 
-		// for(var i=0; i<lines.length; i++) { 
-		// 	var line = lines[i]; 
-		// 	if(line.checked) { 
-		// 		c.moveTo(line.p1.x, line.p1.y);	
-		// 		c.lineTo(line.p2.x, line.p2.y);
-		// 		
-		// 		if(line.p2.x+rightedge < view.right) { 
-		// 				c.moveTo(line.p1.x+rightedge, line.p1.y);	
-		// 				c.lineTo(line.p2.x+rightedge, line.p2.y);
-		// 			
-		// 		}
-		// 	}		
-		// }	
-		// c.strokeStyle = 'red'; 
-		// c.stroke(); 
 	
 	};
 	
@@ -232,10 +213,6 @@ function Landscape(){
 			var zone = availableZones[zonenumber];
 			line = lines[zone.lineNum];
 
-			// var zoneLabel : TextDisplay = zoneLabels[i]; 
-			// 		zoneLabel.x = line.p1.x + ((line.p2.x - line.p1.x) / 2);
-			// 		zoneLabel.y = line.p1.y;
-			// 		zoneLabel.text = zone.multiplier + "X";
 			line.multiplier = zone.multiplier;
 
 		}

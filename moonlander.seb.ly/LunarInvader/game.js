@@ -266,12 +266,12 @@ function setLanded(line) {
 	if(lander.vel.y<0.075) { 
 		points = 50 * multiplier; 
 		// show message - "a perfect landing"; 
-		infoDisplay.showGameInfo("CONGRATULATIONS<br>A PERFECT LANDING\n" + points + " POINTS");
+		//infoDisplay.showGameInfo("CONGRATULATIONS<br>A PERFECT LANDING\n" + points + " POINTS");
 		lander.fuel+=50;
 	} else {
 		points = 15 * multiplier; 
 		// YOU LANDED HARD
-		infoDisplay.showGameInfo("YOU LANDED HARD<br>YOU ARE HOPELESSLY MAROONED<br>" + points + " POINTS");
+		//infoDisplay.showGameInfo("YOU LANDED HARD<br>YOU ARE HOPELESSLY MAROONED<br>" + points + " POINTS");
 		lander.makeBounce(); 
 	}
 	
@@ -321,7 +321,7 @@ function setCrashed() {
 		
 	}
 	
-	infoDisplay.showGameInfo(msg);
+	//infoDisplay.showGameInfo(msg);
 	
 	scheduleRestart(); 
 }
@@ -475,13 +475,13 @@ function pointIsLessThanLine(point, linepoint1, linepoint2) {
 // }
 function updateTextInfo() {
 	
-	infoDisplay.updateBoxInt('score', score, 4); 
+	//infoDisplay.updateBoxInt('score', score, 4); 
 	infoDisplay.updateBoxInt('fuel', lander.fuel, 4); 
-	if(gameState == PLAYING) infoDisplay.updateBoxTime('time', counter*mpf); 
+	//if(gameState == PLAYING) infoDisplay.updateBoxTime('time', counter*mpf); 
 	
-	infoDisplay.updateBoxInt('alt', (lander.altitude<0) ? 0 : lander.altitude, 4); 
-	infoDisplay.updateBoxInt('horizSpeed', (lander.vel.x*200)); 	
-	infoDisplay.updateBoxInt('vertSpeed', (lander.vel.y*200)); 	
+	//infoDisplay.updateBoxInt('alt', (lander.altitude<0) ? 0 : lander.altitude, 4); 
+	//infoDisplay.updateBoxInt('horizSpeed', (lander.vel.x*200)); 	
+	//infoDisplay.updateBoxInt('vertSpeed', (lander.vel.y*200)); 	
 	
 	// +(lander.vel.x<0)?' ‹':' ›'
 	// +(lander.vel.y<0)?' ˆ':' >'
@@ -490,9 +490,9 @@ function updateTextInfo() {
 		if((counter%50)<30) { 
 			var playBeep; 
 			if(lander.fuel <= 0) {
-				playBeep = infoDisplay.showGameInfo("Out of fuel"); 
+				//playBeep = infoDisplay.showGameInfo("Out of fuel"); 
 			} else {
-				playBeep = infoDisplay.showGameInfo("Low on fuel");
+				//playBeep = infoDisplay.showGameInfo("Low on fuel");
 			} 
 		} else {
 			infoDisplay.hideGameInfo(); 
