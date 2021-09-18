@@ -21,7 +21,7 @@ function Landscape(){
 
 	var maxRanderHeight = 720;
 	const tile = new Image();
-	tile.src = "assets/test.png";
+	tile.src = "Assets/test.png";
 	var tile_width = 0;
 	var tile_height = 0;
 	tile.onload = function(){

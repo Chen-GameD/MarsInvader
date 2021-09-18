@@ -8,7 +8,7 @@ Missile = function(velX, velY, posX, posY){
     this.scale = 0.25;
     this.active = true;
     this.missileImg = new Image();
-	this.missileImg.src="assets/SpaceXShuttle/socket.png";
+	this.missileImg.src="Assets/SpaceXShuttle//SpaceXShuttle.png";
 
     if(view.scale == SCREEN_HEIGHT/700){
         this.scale = 0.6;
