@@ -20,7 +20,7 @@ function UIDisplay(width, height) {
 		fuelLabel = makeInfoBox("Fuel"), 
 		score = this.score = makeInfoBox("0000"), 
 		time = this.time = makeInfoBox("0:00"), 
-		fuel = this.fuel = makeInfoBox("0000"),
+		fuel = this.fuel = makeInfoBox("0000");
 		
 		altLabel = makeInfoBox("Altitude", LEFT, 250),
 		horizSpeedLabel = makeInfoBox("Horizontal Speed", LEFT, 250),

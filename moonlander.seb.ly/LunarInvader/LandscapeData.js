@@ -6,6 +6,9 @@ function Landscape(){
 		stars = this.stars = [],
 	 	availableZones = [], 
 		zoneCombis = [], 
+		enemyCombis = [],
+		enemyMultiplier = 3,
+		enemy = [],
 		currentCombi = 0, 
 		zoneInfos = [], 
 		landscale = 1.5, 
@@ -45,6 +48,11 @@ function Landscape(){
 		var p1 = points[i-1];
 		var p2 = points[i]; 
 		lines.push(new LandscapeLine(p1, p2));
+	}
+
+	for (var i = 0; i < enemy.length; i++)
+	{
+
 	}
 
 	
@@ -114,7 +122,7 @@ function Landscape(){
 					infoBox = zoneInfos[zoneInfoIndex]; 
 					infoBox.show(); 
 				}
-				infoBox.setText(line.multiplier+'x'); 
+				//infoBox.setText(line.multiplier+'x'); 
 				infoBox.setX(((((line.p2.x-line.p1.x)/2)+line.p1.x+offset)*view.scale)+view.x); 
 				infoBox.setY(((line.p2.y+2) *view.scale)+view.y); 
 				zoneInfoIndex++; 
@@ -195,25 +203,16 @@ function Landscape(){
 		}		
 		
 		c.stroke(); 
-		
-		
-		//code to check landable... 
-		// c.beginPath(); 
-		// for(var i=0; i<lines.length; i++) { 
-		// 	var line = lines[i]; 
-		// 	if(line.checked) { 
-		// 		c.moveTo(line.p1.x, line.p1.y);	
-		// 		c.lineTo(line.p2.x, line.p2.y);
-		// 		
-		// 		if(line.p2.x+rightedge < view.right) { 
-		// 				c.moveTo(line.p1.x+rightedge, line.p1.y);	
-		// 				c.lineTo(line.p2.x+rightedge, line.p2.y);
-		// 			
-		// 		}
-		// 	}		
-		// }	
-		// c.strokeStyle = 'red'; 
-		// c.stroke(); 
+
+		//draw enemy
+		for (var i = 0; i < enemy.length; i++)
+		{
+			if (enemy[i].active == true)
+			{
+				enemy[i].update();
+				enemy[i].render(c);
+			}
+		}
 	
 	};
 	
@@ -232,11 +231,16 @@ function Landscape(){
 			var zone = availableZones[zonenumber];
 			line = lines[zone.lineNum];
 
-			// var zoneLabel : TextDisplay = zoneLabels[i]; 
-			// 		zoneLabel.x = line.p1.x + ((line.p2.x - line.p1.x) / 2);
-			// 		zoneLabel.y = line.p1.y;
-			// 		zoneLabel.text = zone.multiplier + "X";
 			line.multiplier = zone.multiplier;
+
+			//enemy
+			if (zonenumber == enemyCombis[currentCombi])
+			{
+				//CreateEnemy
+				var tempE = new Enemy((line.p2.x + line.p1.x) / 2, line.p1.y);
+				enemy.push(tempE);
+				line.multiplier *= enemyMultiplier;
+			}
 
 		}
 
@@ -433,7 +437,13 @@ function Landscape(){
 		zoneCombis.push([1,4,7,9]);	
 	
 		
-		
+		enemyCombis.push(3);
+		enemyCombis.push(8);
+		enemyCombis.push(3);
+		enemyCombis.push(4);
+		enemyCombis.push(5);
+		enemyCombis.push(7);
+		enemyCombis.push(4);
 		
 		
 	}
