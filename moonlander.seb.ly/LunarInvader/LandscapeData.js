@@ -217,6 +217,7 @@ function Landscape(){
 	};
 	
 	this.setZones = function () { 
+		enemy = [];
 
 		for (var i=0; i<lines.length; i++)
 		{
