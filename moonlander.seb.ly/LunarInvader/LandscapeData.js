@@ -6,6 +6,9 @@ function Landscape(){
 		stars = this.stars = [],
 	 	availableZones = [], 
 		zoneCombis = [], 
+		enemyCombis = [],
+		enemyMultiplier = 3,
+		enemy = [],
 		currentCombi = 0, 
 		zoneInfos = [], 
 		landscale = 1.5, 
@@ -45,6 +48,11 @@ function Landscape(){
 		var p1 = points[i-1];
 		var p2 = points[i]; 
 		lines.push(new LandscapeLine(p1, p2));
+	}
+
+	for (var i = 0; i < enemy.length; i++)
+	{
+
 	}
 
 	
@@ -195,6 +203,16 @@ function Landscape(){
 		}		
 		
 		c.stroke(); 
+
+		//draw enemy
+		for (var i = 0; i < enemy.length; i++)
+		{
+			if (enemy[i].active == true)
+			{
+				enemy[i].update();
+				enemy[i].render(c);
+			}
+		}
 	
 	};
 	
@@ -214,6 +232,15 @@ function Landscape(){
 			line = lines[zone.lineNum];
 
 			line.multiplier = zone.multiplier;
+
+			//enemy
+			if (zonenumber == enemyCombis[currentCombi])
+			{
+				//CreateEnemy
+				var tempE = new Enemy((line.p2.x + line.p1.x) / 2, line.p1.y);
+				enemy.push(tempE);
+				line.multiplier *= enemyMultiplier;
+			}
 
 		}
 
@@ -410,7 +437,13 @@ function Landscape(){
 		zoneCombis.push([1,4,7,9]);	
 	
 		
-		
+		enemyCombis.push(3);
+		enemyCombis.push(8);
+		enemyCombis.push(3);
+		enemyCombis.push(4);
+		enemyCombis.push(5);
+		enemyCombis.push(7);
+		enemyCombis.push(4);
 		
 		
 	}

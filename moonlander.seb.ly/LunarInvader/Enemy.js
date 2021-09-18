@@ -1,34 +1,49 @@
 Enemy = function(posX, posY){
-    var pos = this.pos = new Vector2(posX,posY),
-    this.scale = 0.25;
+    var pos = this.pos = new Vector2(posX,posY);
+    this.scale = 1;
     this.active = true;
     this.enemy = new Image();
 	this.enemy.src="assets/SpaceXShuttle/socket.png";
+    this.width = 10;
+    this.enemy.onload = function(){
+        width = this.enemy.width * this.scale;
+    }
 
     if(view.scale == SCREEN_HEIGHT/700){
-        this.scale = 0.6;
+        this.scale = 1;
     } else{
-        this.scale = 0.25;
+        this.scale = 1;
+    }
+
+    this. setPos = function(x, y){
+        pos.x = x;
+        pos.y = y;
     }
 
     this.update = function(){
     
-        vel.y += gravity;
-        pos.x += vel.x;
-        pos.y += vel.y;
     };
 
-    this.render = function(c, scale){
+    this.render = function(c){
         
         c.save(); 
 		
-		
-		c.translate(pos.x, pos.y); 
+		var x = pos.x - this.width / 2;
+        var y = pos.y - this.width;
+		c.translate(x, y); 
+        
 		c.scale(this.scale, this.scale); 
+
+        //draw collision
+        c.moveTo(x, y);
+        c.lineTo(x + this.width, y);
+        c.lineTo(x + this.width, y + this.width);
+        c.lineTo(x, y + this.width);
+        c.closePath();
 		
 	
 		//test git
-		c.drawImage(this.missileImg,0, 0,10,10);
+		c.drawImage(this.enemy,0, 0,10,10);
 		
 		c.restore(); 
     };

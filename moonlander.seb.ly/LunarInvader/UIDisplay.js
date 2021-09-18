@@ -15,20 +15,20 @@ function UIDisplay(width, height) {
 		RIGHT = 2; 
 	
 	
-	var //scoreLabel = makeInfoBox("Score"),
-		//timeLabel = makeInfoBox("Time"),
+	var scoreLabel = makeInfoBox("Score"),
+		timeLabel = makeInfoBox("Time"),
 		fuelLabel = makeInfoBox("Fuel"), 
-		//score = this.score = makeInfoBox("0000"), 
-		//time = this.time = makeInfoBox("0:00"), 
+		score = this.score = makeInfoBox("0000"), 
+		time = this.time = makeInfoBox("0:00"), 
 		fuel = this.fuel = makeInfoBox("0000");
 		
-		//altLabel = makeInfoBox("Altitude", LEFT, 250),
-		//horizSpeedLabel = makeInfoBox("Horizontal Speed", LEFT, 250),
-		//vertSpeedLabel = makeInfoBox("Vertical Speed", LEFT, 250),
+		altLabel = makeInfoBox("Altitude", LEFT, 250),
+		horizSpeedLabel = makeInfoBox("Horizontal Speed", LEFT, 250),
+		vertSpeedLabel = makeInfoBox("Vertical Speed", LEFT, 250),
 		
-		//alt = this.alt = makeInfoBox("000", RIGHT),
-		//horizSpeed = this.horizSpeed = makeInfoBox("000", RIGHT),
-		//vertSpeed = this.vertSpeed = makeInfoBox("000", RIGHT), 
+		alt = this.alt = makeInfoBox("000", RIGHT),
+		horizSpeed = this.horizSpeed = makeInfoBox("000", RIGHT),
+		vertSpeed = this.vertSpeed = makeInfoBox("000", RIGHT), 
 		
 		messages = this.messages = makeInfoBox("TEST", CENTRE, 300) ;
 		messages.domElement.className = "titleBox";
@@ -59,45 +59,45 @@ function UIDisplay(width, height) {
 			column2Left = leftMargin+((SCREEN_WIDTH<650)?46:80), 
 			column3Left = rightMargin- ((SCREEN_WIDTH<650)?160:280);  
 		
-		//scoreLabel.setX(leftMargin);
-		//timeLabel.setX(leftMargin);
+		scoreLabel.setX(leftMargin);
+		timeLabel.setX(leftMargin);
 		fuelLabel.setX(leftMargin);
 		
-		//score.setX(column2Left);
-		//time.setX(column2Left);
+		score.setX(column2Left);
+		time.setX(column2Left);
 		fuel.setX(column2Left);
 		
-		//altLabel.setX(column3Left); 
-		//horizSpeedLabel.setX(column3Left); 
-		//vertSpeedLabel.setX(column3Left); 
+		altLabel.setX(column3Left); 
+		horizSpeedLabel.setX(column3Left); 
+		vertSpeedLabel.setX(column3Left); 
 		
-		//alt.setX(rightMargin); 
-		//horizSpeed.setX(rightMargin); 
-		//vertSpeed.setX(rightMargin); 
+		alt.setX(rightMargin); 
+		horizSpeed.setX(rightMargin); 
+		vertSpeed.setX(rightMargin); 
 	
 		var ypos = topMargin; 
 	
 		
-		//scoreLabel.setY(ypos); 
-		//score.setY(ypos); 
-		//altLabel.setY(ypos); 
-		//alt.setY(ypos); 
+		scoreLabel.setY(ypos); 
+		score.setY(ypos); 
+		altLabel.setY(ypos); 
+		alt.setY(ypos); 
 		
 		
 		ypos+=vSpace; 
 		
-		//timeLabel.setY(ypos); 
-		//time.setY(ypos); 
-		//horizSpeedLabel.setY(ypos); 
-		//horizSpeed.setY(ypos); 
+		timeLabel.setY(ypos); 
+		time.setY(ypos); 
+		horizSpeedLabel.setY(ypos); 
+		horizSpeed.setY(ypos); 
 		
 		ypos+=vSpace; 
 		
 		fuelLabel.setY(ypos); 
 		fuel.setY(ypos); 
 		
-		//vertSpeedLabel.setY(ypos); 
-		//vertSpeed.setY(ypos);
+		vertSpeedLabel.setY(ypos); 
+		vertSpeed.setY(ypos);
 		
 		messages.setX(width/2); 
 		messages.setY(((height-topMargin)/4)+topMargin); 
