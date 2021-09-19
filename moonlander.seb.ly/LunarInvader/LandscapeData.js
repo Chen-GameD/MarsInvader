@@ -8,7 +8,7 @@ function Landscape(){
 		zoneCombis = [], 
 		enemyCombis = [],
 		enemyMultiplier = 3,
-		enemy = [],
+		enemy = this.enemies = [],
 		currentCombi = 0, 
 		zoneInfos = [], 
 		landscale = 1.5, 
@@ -25,16 +25,16 @@ function Landscape(){
 	var tile_width = 0;
 	var tile_height = 0;
 	tile.onload = function(){
-		console.log(tile.width);
+	//	console.log(tile.width);
 		tile_width = points[points.length - 1].x - points[0].x;
 		tile_height = tile.height * (tile_width / tile.width);
-		console.log(tile_width, tile_height);
+	//	console.log(tile_width, tile_height);
 	}
 	
 
 
 	rightedge = this.tileWidth = points[points.length - 1].x * landscale ;
-	console.log(rightedge);
+	//console.log(rightedge);
 	
 	for (var i = 0; i<points.length; i++){
 		var p = points[i];
@@ -157,7 +157,7 @@ function Landscape(){
 			zoneInfos[i].hide(); 
 		}
 
-		console.log(0, startOffset, offset);
+	//	console.log(0, startOffset, offset);
 		for (var fillOffset = startOffset; fillOffset <= offset; fillOffset += rightedge)
 		{
 			c.drawImage(tile, fillOffset - fillOff, fillof, tile_width + 1, tile_height);

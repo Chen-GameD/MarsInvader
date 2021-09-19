@@ -1,12 +1,14 @@
 Enemy = function(posX, posY){
+    
     var pos = this.pos = new Vector2(posX,posY);
+    console.log("enemy:"+pos);
     this.scale = 1;
     this.active = true;
     this.enemy = new Image();
-	this.enemy.src="Assets/SpaceXShuttle//SpaceXShuttle.png";
+	this.enemy.src="Assets/SpaceXShuttle/SpaceXShuttle.png";
     this.width = 10;
     this.enemy.onload = function(){
-        width = this.enemy.width * this.scale;
+        width = this.width * this.scale;
     }
 
     if(view.scale == SCREEN_HEIGHT/700){
@@ -16,6 +18,7 @@ Enemy = function(posX, posY){
     }
 
     this. setPos = function(x, y){
+       
         pos.x = x;
         pos.y = y;
     }

@@ -15,7 +15,7 @@ Lander = function() {
 		targetRotation = 0,
 		
 		lastRotationTime = 0, 
-		counter = 0, 
+		animation_offset = 0,
 		abortCounter = -1;  
 	this.isthrusting = false;
 	this.socketImg = new Image();
@@ -37,6 +37,7 @@ Lander = function() {
 		shapePos = this.shapePos = [],
 		shapeVels = this.shapeVels = []; 
 	this.thrustLevel=0; 
+	this.flameImg = [];
 	
 	var reset = this.reset = function () { 
 	
@@ -58,7 +59,10 @@ Lander = function() {
 	};
 		
 	reset(); 
-	
+	for(i = 0; i < 30; i++){
+		this.flameImg[i] = new Image();
+		this.flameImg[i].src =  "Assets/SpaceXShuttle/Animation type2/SpaceXShuttle"+(i+1)+".png";
+	}
 
 	
 	this.rotate = function(direction) { 
@@ -180,11 +184,17 @@ Lander = function() {
 		c.fillStyle = "red";
 		c.strokeStyle = "black";
 	
-		if((this.isthrusting) && (this.active)) {
+		if(this.isthrusting&&this.active) {
+			c.drawImage(this.flameImg[animation_offset],-11, -16,70/3,150/3);
+			console.log(this.socketImg.src);
+			animation_offset ++;
+			animation_offset = animation_offset%30;
 		
-			c.drawImage(this.socketImg,-11, -16,20,33);
+			
 		} else {
-			c.drawImage(this.socket_noflameImg,-11, -16,20,33);
+			
+			c.drawImage(this.socket_noflameImg,-11, -16,70/3,100/3);
+
 		}
 
 		
