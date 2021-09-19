@@ -18,7 +18,7 @@ Missile = function(velX, velY, posX, posY){
 
     this.update = function(){
        
-        var enemies = landscape.enemies;
+        var enemies = landscape.enemy;
         var length = enemies.length;
 
         for(i = 0; i < length; i++){

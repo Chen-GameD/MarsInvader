@@ -117,7 +117,6 @@ Lander = function() {
 		this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
 		this.centerPos.y = (this.pos.y + this.bottomRight.y) / 2;
 		this.width = Math.abs(this.pos.x - this.bottomRight.x);
-		console.log(this.width);
 	
 		counter++; 
 		
@@ -180,8 +179,8 @@ Lander = function() {
 		
 		
 		c.translate(pos.x, pos.y); 
-		c.scale(this.scale, this.scale); 
-		c.lineWidth = 1/(this.scale * scale); 
+		c.scale(this.scale,this.scale); 
+		
 		c.rotate(this.rotation * TO_RADIANS); 
 		c.strokeStyle = this.colour; 
 	
@@ -193,7 +192,7 @@ Lander = function() {
 	
 		if(this.isthrusting&&this.active) {
 			c.drawImage(this.flameImg[animation_offset],-11, -16,70/3,150/3);
-			console.log(this.socketImg.src);
+		
 			animation_offset ++;
 			animation_offset = animation_offset%30;
 		

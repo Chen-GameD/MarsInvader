@@ -1,7 +1,7 @@
 Enemy = function(posX, posY){
     
     var pos = this.pos = new Vector2(posX,posY);
-    console.log("enemy:"+pos);
+  
     this.scale = 1;
     this.active = true;
     this.enemy = new Image();
