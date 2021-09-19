@@ -4,7 +4,6 @@ Lander = function() {
 		pos = this.pos = new Vector2(0,0),
 		bottomLeft = this.bottomLeft = new Vector2(0,0),
 		bottomRight = this.bottomRight = new Vector2(0,0), 
-		centerPos = this.centerPos = new Vector2(0, 0),
 		thrustVec = new Vector2(0,0),
 		gravity = 0.0005,
 		thrustAcceleration = 0.0015,
@@ -16,16 +15,11 @@ Lander = function() {
 		targetRotation = 0,
 		
 		lastRotationTime = 0, 
-		animation_offset = 0,
+		counter = 0, 
 		abortCounter = -1;  
-	this.isthrusting = false;
-	this.socketImg = new Image();
-	this.socketImg.src="Assets/SpaceXShuttle/SpaceXShuttle.png";
-	this.socket_noflameImg = new Image();
-	this.socket_noflameImg.src = "Assets/SpaceXShuttle/SpaceXShuttle_noflame.png"
+	
 	this.rotation = 0; 
 	this.thrusting = 0;
-	this.width = 0;
 	this.altitude = 0;
 	this.active = true; 
 	this.fuel = 0; 
@@ -39,7 +33,6 @@ Lander = function() {
 		shapePos = this.shapePos = [],
 		shapeVels = this.shapeVels = []; 
 	this.thrustLevel=0; 
-	this.flameImg = [];
 	
 	var reset = this.reset = function () { 
 	
@@ -61,10 +54,7 @@ Lander = function() {
 	};
 		
 	reset(); 
-	for(i = 0; i < 30; i++){
-		this.flameImg[i] = new Image();
-		this.flameImg[i].src =  "Assets/SpaceXShuttle/Animation type2/SpaceXShuttle"+(i+1)+".png";
-	}
+	
 
 	
 	this.rotate = function(direction) { 
@@ -100,23 +90,8 @@ Lander = function() {
 			lastAbort = now; 
 		} 
 	}
-	//drop a bomb
-	this.shoot = function(){
-
-		if(missiles.length == 0){
-			missiles[0] = new Missile(vel.x, vel.y, pos.x, pos.y);
-		}else if(missiles.length == 1){
-			missiles[1] = new Missile(vel.x, vel.y, pos.x, pos.y);
-		}
-		
-		
-	}
-
+	
 	this.update = function() { 
-
-		this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
-		this.centerPos.y = (this.pos.y + this.bottomRight.y) / 2;
-		this.width = Math.abs(this.pos.x - this.bottomRight.x);
 	
 		counter++; 
 		
@@ -169,6 +144,7 @@ Lander = function() {
 			
 		}
 		if(this.fuel<0) this.fuel = 0; 
+		setThrustVolume(Math.min(1,thrustBuild)); 
 		
 		this.thrustLevel = thrustBuild;
 		
@@ -176,43 +152,45 @@ Lander = function() {
 	
 	this.render = function(c, scale) { 
 		c.save(); 
-		
+		scale = 0.5;
 		
 		c.translate(pos.x, pos.y); 
-		c.scale(this.scale,this.scale); 
-		
+		c.scale(this.scale, this.scale); 
+		c.lineWidth = 1/(this.scale * scale); 
 		c.rotate(this.rotation * TO_RADIANS); 
 		c.strokeStyle = this.colour; 
 	
-	
-		//test git
-		
-		c.fillStyle = "red";
-		c.strokeStyle = "black";
-	
-	
-		if(this.isthrusting&&this.active) {
-			c.drawImage(this.flameImg[animation_offset],-11, -16,70/3,150/3);
-		
-			animation_offset ++;
-			animation_offset = animation_offset%30;
-		
-			
-		} else {
-			
-			c.drawImage(this.socket_noflameImg,-11, -16,70/3,100/3);
-
+		var img = new Image();
+		img.src = "resources/soket.png";
+		img.width = "200";
+		img.height = "200";
+		if(scale>6){
+			c.drawImage(img,-10, -10,20/3,35/3);
+		}else {
+			c.drawImage(img,-10, -10,20,35);
 		}
-
 		
 		
+		//c.beginPath(); 
+		
+		//this.renderShapes(c);
+		
+		// if((thrustBuild>0) && (this.active)) {
+		// 	c.lineTo(0,11+(Math.min(thrustBuild,1)*20*((((counter>>1)%3)*0.2)+1)));
+		// 	c.closePath(); 
+		// }	
 		
 		
 		c.stroke(); 
 		
 		c.restore(); 
 		
-		
+		// c.beginPath(); 
+		// 	c.moveTo(bottomLeft.x, bottomLeft.y); 
+		// 	c.lineTo(bottomRight.x, bottomRight.y); 
+		// 	c.stroke(); 
+		// 	
+		this.colour = 'white'; 
 		 
 	};
 	this.crash = function () { 
