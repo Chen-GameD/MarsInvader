@@ -47,6 +47,8 @@ var	WAITING = 0,
 	testPoints = [],
 	//missiles
 	missiles = [],
+	boomEffects = [],
+	boomLength = 0,
 // canvas element and 2D context
 	canvas = document.createElement( 'canvas' ),
 	context = canvas.getContext( '2d' ),
@@ -128,9 +130,11 @@ function loop() {
 	while(elapsedFrames > counter) {
 		lander.update(); 
 
-		for(i = 0; i < missiles.length; i++){
-			if(missiles[i].active){
-				missiles[i].update();
+		for(q = 0; q < missiles.length; q++){
+		
+			if(missiles[q].active){
+				missiles[q].update();
+			
 			}
 		}
 		
@@ -152,10 +156,12 @@ function loop() {
 
 	lander.update(); 
 
-	for(i = 0; i < missiles.length; i++){
-		if(missiles[i].active){
-			missiles[i].update();
+	for(q = 0; q < missiles.length; q++){
+	
+		if(missiles[q].active){
+			missiles[q].update();
 		}
+		
 	}
 	
 	if((gameState == WAITING) && (lander.altitude<100) ) {
@@ -184,8 +190,9 @@ function render() {
 	c.save(); 
 	c.translate(view.x, view.y); 
 	c.scale(view.scale, view.scale); 
-    console.log(view.scale);
+ 
 	landscape.render(context, view, lander.pos);
+	if(lander.active)
 	lander.render(context, view.scale);
 
 	for(i = 0; i < missiles.length; i++){
@@ -194,6 +201,12 @@ function render() {
 		}
 	}	
 
+	for(i = 0; i < boomLength; i++){
+		
+		if(boomEffects[i].active){
+			boomEffects[i].render(context);
+		}
+	}
 	if(counter%4==0) updateTextInfo(); 
 	
 	c.restore();
@@ -318,6 +331,7 @@ function setCrashed() {
 			setGameOver()
 		}
 	
+		
 		
 	}
 	
@@ -445,7 +459,7 @@ function checkCollisions() {
 			if(missile.active){
 				
 				if(missile.pos.x+0>line.p1.x && missile.pos.x+0 < line.p2.x){
-					if(missile.pos.y+5 > line.p1.y || missile.pos.y+5 > line.p2.y){
+					if(missile.pos.y > line.p1.y || missile.pos.y> line.p2.y){
 						//boom
 						missile.crash();
 					}

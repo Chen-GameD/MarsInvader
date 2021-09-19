@@ -105,6 +105,7 @@ Lander = function() {
 
 		if(missiles.length == 0){
 			missiles[0] = new Missile(vel.x, vel.y, pos.x, pos.y);
+			
 		}else if(missiles.length == 1){
 			missiles[1] = new Missile(vel.x, vel.y, pos.x, pos.y);
 		}
@@ -216,6 +217,7 @@ Lander = function() {
 		 
 	};
 	this.crash = function () { 
+		boomEffects[boomLength++] = new BoomEffect(lander.pos);
 		this.rotation = targetRotation = 0; 
 		this.active = false; 
 		exploding = true; 
