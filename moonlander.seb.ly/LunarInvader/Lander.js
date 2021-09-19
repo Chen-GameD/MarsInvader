@@ -4,6 +4,7 @@ Lander = function() {
 		pos = this.pos = new Vector2(0,0),
 		bottomLeft = this.bottomLeft = new Vector2(0,0),
 		bottomRight = this.bottomRight = new Vector2(0,0), 
+		centerPos = this.centerPos = new Vector2(0, 0),
 		thrustVec = new Vector2(0,0),
 		gravity = 0.0005,
 		thrustAcceleration = 0.0015,
@@ -24,6 +25,7 @@ Lander = function() {
 	this.socket_noflameImg.src = "assets/SpaceXShuttle/socket_noflame.png"
 	this.rotation = 0; 
 	this.thrusting = 0;
+	this.width = 0;
 	this.altitude = 0;
 	this.active = true; 
 	this.fuel = 0; 
@@ -107,6 +109,11 @@ Lander = function() {
 	}
 
 	this.update = function() { 
+
+		this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
+		this.centerPos.y = (this.pos.y + this.bottomRight.y) / 2;
+		this.width = Math.abs(this.pos.x - this.bottomRight.x);
+		console.log(this.width);
 	
 		counter++; 
 		

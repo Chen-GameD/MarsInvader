@@ -8,7 +8,7 @@ function Landscape(){
 		zoneCombis = [], 
 		enemyCombis = [],
 		enemyMultiplier = 3,
-		enemy = [],
+		enemy = this.enemy = [],
 		currentCombi = 0, 
 		zoneInfos = [], 
 		landscale = 1.5, 
@@ -28,13 +28,13 @@ function Landscape(){
 		console.log(tile.width);
 		tile_width = points[points.length - 1].x - points[0].x;
 		tile_height = tile.height * (tile_width / tile.width);
-		console.log(tile_width, tile_height);
+		//console.log(tile_width, tile_height);
 	}
 	
 
 
 	rightedge = this.tileWidth = points[points.length - 1].x * landscale ;
-	console.log(rightedge);
+	//console.log(rightedge);
 	
 	for (var i = 0; i<points.length; i++){
 		var p = points[i];
@@ -49,12 +49,6 @@ function Landscape(){
 		var p2 = points[i]; 
 		lines.push(new LandscapeLine(p1, p2));
 	}
-
-	for (var i = 0; i < enemy.length; i++)
-	{
-
-	}
-
 	
 	// make stars... 
 	for(var i = 0;i < lines.length;i++)	{
@@ -69,7 +63,7 @@ function Landscape(){
 		}
 	}
 	
-	var render = this.render = function(c, view) { 
+	var render = this.render = function(c, view, playerPos) { 
 
 		var offset = 0; 
 		
@@ -122,7 +116,7 @@ function Landscape(){
 					infoBox = zoneInfos[zoneInfoIndex]; 
 					infoBox.show(); 
 				}
-				//infoBox.setText(line.multiplier+'x'); 
+				infoBox.setText(line.multiplier+'x'); 
 				infoBox.setX(((((line.p2.x-line.p1.x)/2)+line.p1.x+offset)*view.scale)+view.x); 
 				infoBox.setY(((line.p2.y+2) *view.scale)+view.y); 
 				zoneInfoIndex++; 
@@ -157,7 +151,7 @@ function Landscape(){
 			zoneInfos[i].hide(); 
 		}
 
-		console.log(0, startOffset, offset);
+		//console.log(0, startOffset, offset);
 		for (var fillOffset = startOffset; fillOffset <= offset; fillOffset += rightedge)
 		{
 			c.drawImage(tile, fillOffset - fillOff, fillof, tile_width + 1, tile_height);
@@ -205,19 +199,19 @@ function Landscape(){
 		c.stroke(); 
 
 		//draw enemy
-		for (var i = 0; i < enemy.length; i++)
+		for (var i = 0; i < this.enemy.length; i++)
 		{
-			if (enemy[i].active == true)
+			if (this.enemy[i].active == true)
 			{
-				enemy[i].update();
-				enemy[i].render(c);
+				this.enemy[i].update(playerPos);
+				this.enemy[i].render(c);
 			}
 		}
 	
 	};
 	
 	this.setZones = function () { 
-		enemy = [];
+		this.enemy = [];
 
 		for (var i=0; i<lines.length; i++)
 		{
@@ -239,7 +233,7 @@ function Landscape(){
 			{
 				//CreateEnemy
 				var tempE = new Enemy((line.p2.x + line.p1.x) / 2, line.p1.y);
-				enemy.push(tempE);
+				this.enemy.push(tempE);
 				line.multiplier *= enemyMultiplier;
 			}
 

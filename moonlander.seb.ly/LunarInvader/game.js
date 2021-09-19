@@ -185,7 +185,7 @@ function render() {
 	c.translate(view.x, view.y); 
 	c.scale(view.scale, view.scale); 
 
-	landscape.render(context, view);
+	landscape.render(context, view, lander.pos);
 	lander.render(context, view.scale);
 
 	for(i = 0; i < missiles.length; i++){
@@ -452,7 +452,20 @@ function checkCollisions() {
 				}
 			}
 		}
-	}	
+	}
+	
+	for (var i = 0; i < landscape.enemy.length; i++)
+	{
+		for (var j = 0; j < landscape.enemy[i].packages.length; j++)
+		{
+			//console.log(Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)));
+			console.log(lander.width, landscape.enemy[i].packages[j].width);
+			if (Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)) <= (lander.width + landscape.enemy[i].packages[j].width))
+			{
+				setCrashed();
+			}
+		}
+	}
 	
 };
 
