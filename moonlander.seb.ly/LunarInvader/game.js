@@ -285,7 +285,7 @@ function setLanded(line) {
 	lander.land(); 
 	
 	var points = 0; 
-	if(lander.vel.y<0.075) { 
+	if(lander.vel.y<0.75) { 
 		points = 50 * multiplier; 
 		// show message - "a perfect landing"; 
 		infoDisplay.showGameInfo("CONGRATULATIONS<br>A PERFECT LANDING\n" + points + " POINTS");
@@ -442,7 +442,7 @@ function checkCollisions() {
 						//console.log('lander within line', lander.rotation, lander.vel.y);
 						// and we're horizontal and moving slowly
 						console.log("velocity:"+lander.vel.y);	
-						if((lander.rotation==0) && (lander.vel.y<0.15)) {
+						if((lander.rotation==0) && (lander.vel.y<1.5)) {
 							
 							//console.log('horizontal and slow');
 							setLanded(line);

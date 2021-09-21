@@ -113,7 +113,7 @@ Lander = function() {
 		
 	}
 
-	this.update = function(times = 20) { 
+	this.update = function(times = 10) { 
 
 		this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
 		this.centerPos.y = (this.pos.y + this.bottomRight.y) / 2;
