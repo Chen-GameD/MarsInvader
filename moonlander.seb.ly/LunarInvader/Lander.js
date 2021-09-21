@@ -144,7 +144,7 @@ Lander = function() {
 			thrustBuild += ((this.thrusting-thrustBuild)*0.2);
 		
 			if(thrustBuild>0) { 
-				thrustVec.reset(0,-thrustAcceleration*thrustBuild); 
+				thrustVec.reset(0,-thrustAcceleration*thrustBuild*20); 
 				thrustVec.rotate(this.rotation); 
 				vel.plusEq(thrustVec); 
 				this.fuel -= (0.2 * thrustBuild);
@@ -152,7 +152,7 @@ Lander = function() {
 	
 			pos.plusEq(vel); 
 			vel.x*=drag; 
-			vel.y+=gravity; 
+			vel.y+=gravity*12; 
 			if(vel.y>topSpeed) velY=topSpeed; 
 			else if (vel.y<-topSpeed) velY=-topSpeed; 
 		

@@ -420,7 +420,7 @@ function checkCollisions() {
 		if(!((right<line.p1.x) || (left>line.p2.x))){ 
 		
 			lander.altitude = line.p1.y-lander.bottom; 
-				
+			
 			
 			// if the line's horizontal 
 			if(line.landable) { 
@@ -431,14 +431,18 @@ function checkCollisions() {
 					if((left>line.p1.x) && (right<line.p2.x)) {
 						//console.log('lander within line', lander.rotation, lander.vel.y);
 						// and we're horizontal and moving slowly
+						console.log("velocity:"+lander.vel.y);	
 						if((lander.rotation==0) && (lander.vel.y<0.15)) {
+							
 							//console.log('horizontal and slow');
 							setLanded(line);
 						} else {
+							console.log(2);
 							setCrashed(); 
 						} 
 					} else {
 						// if we're not within the line
+						console.log(3);
 						setCrashed(); 
 					}
 				}
@@ -449,7 +453,7 @@ function checkCollisions() {
 			
 				if( pointIsLessThanLine(lander.bottomLeft, line.p1, line.p2) || 	
 						pointIsLessThanLine(lander.bottomRight, line.p1, line.p2)) {
-				
+							console.log(4);
 					setCrashed(); 
 				}
 			}
@@ -486,6 +490,7 @@ function checkCollisions() {
 				//console.log(lander.width, landscape.enemy[i].packages[j].width);
 				if (Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)) <= (lander.width + landscape.enemy[i].packages[j].width))
 				{
+					console.log(5);
 					setCrashed();
 				}
 			}
