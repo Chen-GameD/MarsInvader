@@ -4,7 +4,7 @@ Missile = function(velX, velY, posX, posY){
 
     var vel = this.vel = new Vector2(velX*2, velY),
         pos = this.pos = new Vector2(posX,posY),
-        gravity = 0.002;
+        gravity = 0.02;
     this.scale = 0.25;
     this.active = true;
     this.missileImg = new Image();

@@ -23,7 +23,7 @@ function Landscape(){
 
 	var maxRanderHeight = 720;
 	const tile = new Image();
-	tile.src = "Assets/test.png";
+	tile.src = "Assets/MarsGround.png";
 	var tile_width = 0;
 	var tile_height = 0;
 	tile.onload = function(){
@@ -154,7 +154,7 @@ function Landscape(){
 		}
 
 
-		for (var fillOffset = startOffset; fillOffset <= offset; fillOffset += rightedge)
+		for (var fillOffset = startOffset; fillOffset <= offset + rightedge; fillOffset += rightedge)
 		{
 			c.drawImage(tile, fillOffset - fillOff, fillof, tile_width + 1, tile_height);
 		}

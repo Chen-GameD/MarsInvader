@@ -4,13 +4,14 @@ Enemy = function(posX, posY){
   
     this.scale = 1;
     this.active = true;
-    this.enemy = new Image();
-	this.enemy.src="Assets/SpaceXShuttle/SpaceXShuttle.png";
+    this.enemyImag = [];
+    for(i = 0; i < 5; i++){
+		this.enemyImag[i] = new Image();
+		this.enemyImag[i].src =  "assets/Turret/sequence/Turret"+(i+1)+".png";
+	}
+    animationOffset = 0;
+    timer = 0;
     this.width = 10;
-
-    this.enemy.onload = function(){
-        width = this.width * this.scale;
-    }
 
     this.shootInterval = 2000;
     this.currentInterval = Date.now();
@@ -60,16 +61,23 @@ Enemy = function(posX, posY){
 		c.scale(this.scale, this.scale); 
 
 		//test git
-		c.drawImage(this.enemy,0, 0,10,10);
+		c.drawImage(this.enemyImag[animationOffset],-22, -40,50,50);
+        if (timer % 2 == 0)
+        {
+            animationOffset++;
+            animationOffset = animationOffset % 5;
+        }
+        timer++;
+        
 		c.restore(); 
 
         c.beginPath();
         //draw collision
-        c.moveTo(x, y);
-        c.lineTo(x + this.width, y);
-        c.lineTo(x + this.width, y + this.width);
-        c.lineTo(x, y + this.width);
-        c.closePath();
+        //c.moveTo(x, y);
+        //c.lineTo(x + this.width, y);
+        //c.lineTo(x + this.width, y + this.width);
+        //c.lineTo(x, y + this.width);
+        //c.closePath();
 
         c.stroke(); 
        

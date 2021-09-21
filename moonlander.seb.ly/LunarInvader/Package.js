@@ -49,11 +49,11 @@ Package = function(posX, posY, targetPos){
 
         //draw collision
         c.beginPath();
-        c.moveTo(x, y);
-        c.lineTo(x + this.width, y);
-        c.lineTo(x + this.width, y + this.width);
-        c.lineTo(x, y + this.width);
-        c.closePath();
+        //c.moveTo(x, y);
+        //c.lineTo(x + this.width, y);
+        //c.lineTo(x + this.width, y + this.width);
+        //c.lineTo(x, y + this.width);
+        //c.closePath();
         c.stroke();
     };
    
