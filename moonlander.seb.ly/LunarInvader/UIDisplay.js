@@ -15,10 +15,10 @@ function UIDisplay(width, height) {
 		RIGHT = 2; 
 	
 	
-	var scoreLabel = makeInfoBox("Score"),
+	var scoreLabel = makeInfoBox("Money"),
 		timeLabel = makeInfoBox("Time"),
 		fuelLabel = makeInfoBox("Fuel"), 
-		score = this.score = makeInfoBox("0000"), 
+		score = this.score = makeInfoBox("0000000"), 
 		time = this.time = makeInfoBox("0:00"), 
 		fuel = this.fuel = makeInfoBox("0000");
 		
@@ -56,7 +56,7 @@ function UIDisplay(width, height) {
 			topMargin = Math.min(50, height/12), 
 			rightMargin = w-Math.min(50, width/10), 
 			vSpace = 20, 
-			column2Left = leftMargin+((SCREEN_WIDTH<650)?46:80), 
+			column2Left = leftMargin+((SCREEN_WIDTH<650)?46:100), 
 			column3Left = rightMargin- ((SCREEN_WIDTH<650)?160:280);  
 		
 		scoreLabel.setX(leftMargin);
@@ -127,12 +127,17 @@ function UIDisplay(width, height) {
 		if(padding>0) { 
 			value = ''+value;
 			while((value.length===undefined) || (value.length<padding)) {
-				value = '0'+value; 
+				value = ' '+value; 
 			}
 			
 		}
 		
 		if(this[boxname]) {
+			if (boxname == 'score')
+			{
+				value = '$' + value;
+				value +='M';
+			}
 			this[boxname].setText(value); 
 		}
 		

@@ -40,6 +40,7 @@ var	WAITING = 0,
 	mouseBottom = 0,
 	
 	score = 0, 
+	shootConsumption = 50,
 	time = 0, 
 	
 	lander = new Lander(),
@@ -94,7 +95,13 @@ function init()
 	KeyTracker.addKeyDownListener(KeyTracker.UP, function() { if(gameState==PLAYING) {lander.isthrusting = true;lander.thrust(1);}});
 	KeyTracker.addKeyUpListener(KeyTracker.UP, function() {lander.isthrusting = false; lander.thrust(0);});
 	
-	KeyTracker.addKeyDownListener(KeyTracker.DOWN, function() { if(gameState==PLAYING) lander.shoot();});
+	KeyTracker.addKeyDownListener(KeyTracker.DOWN, function() {
+		 if(gameState==PLAYING && score >= shootConsumption) 
+		 {
+			 lander.shoot();
+			 score -= shootConsumption;
+		 }
+		});
 	
 	
 
@@ -233,7 +240,7 @@ function checkKeys() {
 	// SPEED MODE! 
 	if(KeyTracker.isKeyDown('S')) { 
 		//for(var i=0; i<3;i++){
-			lander.update(3);
+			lander.update(20);
 		//} 
 	}
 	
@@ -379,7 +386,7 @@ function newGame() {
 	lander.fuel = 1000;
 
 	time = 0;
-	score = 0;
+	score = 1000;
 	
 	gameStartTime = Date.now(); 
 	counter = 0; 
