@@ -5,12 +5,15 @@ BoomEffect= function(inPos){
     var offset = 0,
         pos = inPos;
     this.active = true;
+    var audio= new Audio("/assets/Music/Boom.mp3");
+    audio.play();
     for(i = 0; i < 30; i++){
         pictures[i] = new Image();
         pictures[i].src =  "Assets/Effect/ExPlosion/sequence/Explosion"+(i+1)+".png";
 
     }
-    
+   
+
     this.render= function(c){
 
   //  console.log(c);
