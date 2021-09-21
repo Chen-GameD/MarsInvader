@@ -232,7 +232,9 @@ function checkKeys() {
 	
 	// SPEED MODE! 
 	if(KeyTracker.isKeyDown('S')) { 
-		for(var i=0; i<3;i++) lander.update();
+		//for(var i=0; i<3;i++){
+			lander.update(3);
+		//} 
 	}
 	
 }
@@ -306,7 +308,7 @@ function setLanded(line) {
 	scheduleRestart(); 
 }
 
-function setCrashed() { 
+function setCrashed(packageCrash = false) { 
 	lander.crash(); 
 	
 	// show crashed message
@@ -314,33 +316,41 @@ function setCrashed() {
 	
 	var fuellost = Math.round(((Math.random() * 200) + 200));
 	lander.fuel -= fuellost;
-	
-	if(lander.fuel<1) { 
+	if (!packageCrash)
+	{
+		if(lander.fuel<1) { 
 		setGameOver(); 
 		msg = "OUT OF FUEL<br><br>GAME OVER";
 		
-	} else {
-		var rnd  = Math.random();
-		var msg ='';
-		if(rnd < 0.3){
-			msg = "YOU JUST DESTROYED A 100 MEGABUCK LANDER";
-		} else  if(rnd < 0.6){
-			msg = "DESTROYED";
 		} else {
-			msg = "YOU CREATED A TWO MILE CRATER";
-		}
+			var rnd  = Math.random();
+			var msg ='';
+			if(rnd < 0.3){
+				msg = "YOU JUST DESTROYED A 100 MEGABUCK LANDER";
+			} else  if(rnd < 0.6){
+				msg = "DESTROYED";
+			} else {
+				msg = "YOU CREATED A TWO MILE CRATER";
+			}
 		
-		msg = "AUXILIARY FUEL TANKS DESTROYED<br>" + fuellost + " FUEL UNITS LOST<br><br>" + msg;
+			msg = "AUXILIARY FUEL TANKS DESTROYED<br>" + fuellost + " FUEL UNITS LOST<br><br>" + msg;
 		
-		gameState = CRASHED;
-		//ARCADE AMENDMENT
-		if(singlePlayMode) {
-			setGameOver()
-		}
+			gameState = CRASHED;
+			//ARCADE AMENDMENT
+			if(singlePlayMode) {
+				setGameOver()
+			}
 	
 		
 		
+		}
 	}
+	else
+	{
+		setGameOver(); 
+		msg = "YOU WERE SMASHED TO DEATH BY AN AMAZON PACKAGE<br><br>GAME OVER";
+	}
+	
 	
 	infoDisplay.showGameInfo(msg);
 	
@@ -486,7 +496,7 @@ function checkCollisions() {
 				//console.log(lander.width, landscape.enemy[i].packages[j].width);
 				if (Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)) <= (lander.width + landscape.enemy[i].packages[j].width))
 				{
-					setCrashed();
+					setCrashed(true);
 				}
 			}
 		}

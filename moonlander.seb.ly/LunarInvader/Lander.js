@@ -113,7 +113,7 @@ Lander = function() {
 		
 	}
 
-	this.update = function() { 
+	this.update = function(times = 1) { 
 
 		this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
 		this.centerPos.y = (this.pos.y + this.bottomRight.y) / 2;
@@ -144,7 +144,7 @@ Lander = function() {
 			thrustBuild += ((this.thrusting-thrustBuild)*0.2);
 		
 			if(thrustBuild>0) { 
-				thrustVec.reset(0,-thrustAcceleration*thrustBuild); 
+				thrustVec.reset(0,-thrustAcceleration*thrustBuild*times); 
 				thrustVec.rotate(this.rotation); 
 				vel.plusEq(thrustVec); 
 				this.fuel -= (0.2 * thrustBuild);
