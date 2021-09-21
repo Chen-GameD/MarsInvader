@@ -504,13 +504,14 @@ function checkCollisions() {
 	{
 		if (landscape.enemy[i].active)
 		{
+			var _enm = landscape.enemy[i];
 			for (var j = 0; j < landscape.enemy[i].packages.length; j++)
 			{
-				//console.log(Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)));
-				//console.log(lander.width, landscape.enemy[i].packages[j].width);
-				if (Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)) <= (lander.width + landscape.enemy[i].packages[j].width))
+				
+				
+				if (Math.sqrt(Math.pow((lander.centerPos.x - _enm.packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - _enm.packages[j].centerPos.y), 2)) <= (lander.width + _enm.packages[j].width))
 				{
-					landscape.enemy[i].packages[j].active = false;
+					_enm.packages[j].active = false;
 					console.log(5);
 					
 					setCrashed();
