@@ -26,12 +26,12 @@ Missile = function(velX, velY, posX, posY){
             
             if( dis<100){
                 enemies[i].active = false;
-                this.active = false;
+                this.crash();
                 return;
             }
         }
      
-        vel.y += gravity;
+        vel.y += gravity*2;
         pos.x += vel.x;
         pos.y += vel.y;
 
