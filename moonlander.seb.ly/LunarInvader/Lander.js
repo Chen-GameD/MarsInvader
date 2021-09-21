@@ -14,7 +14,7 @@ Lander = function() {
 		bouncing = 0, 
 		exploding = false, 
 		targetRotation = 0,
-		
+		time =-1;
 		lastRotationTime = 0, 
 		animation_offset = 0,
 		abortCounter = -1;  
@@ -102,7 +102,13 @@ Lander = function() {
 	}
 	//drop a bomb
 	this.shoot = function(){
-
+		
+		var t = Date.now();
+	
+		if(t>0&&t-this.time<1000){
+			return;
+		}
+		this.time = t;
 		var tempMissile = new Missile(vel.x, vel.y, pos.x, pos.y);
 		missiles.push(tempMissile);
 
