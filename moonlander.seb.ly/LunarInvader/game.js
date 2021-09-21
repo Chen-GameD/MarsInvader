@@ -222,6 +222,13 @@ function checkKeys() {
 	if(KeyTracker.isKeyDown(abortKey)) { 
 		lander.abort();
 	}
+	//Kill all enemy
+	if(KeyTracker.isKeyDown('Q')){
+		for (var i = 0; i < landscape.enemy.length; i++)
+		{
+			landscape.enemy[i].active = false;
+		}
+	}
 	
 	// SPEED MODE! 
 	if(KeyTracker.isKeyDown('S')) { 
@@ -468,17 +475,22 @@ function checkCollisions() {
 		}
 	}
 	
+	//check package
 	for (var i = 0; i < landscape.enemy.length; i++)
 	{
-		for (var j = 0; j < landscape.enemy[i].packages.length; j++)
+		if (landscape.enemy[i].active)
 		{
-			//console.log(Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)));
-		//	console.log(lander.width, landscape.enemy[i].packages[j].width);
-			if (Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)) <= (lander.width + landscape.enemy[i].packages[j].width))
+			for (var j = 0; j < landscape.enemy[i].packages.length; j++)
 			{
-				setCrashed();
+				//console.log(Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)));
+				//console.log(lander.width, landscape.enemy[i].packages[j].width);
+				if (Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)) <= (lander.width + landscape.enemy[i].packages[j].width))
+				{
+					setCrashed();
+				}
 			}
 		}
+		
 	}
 	
 };
