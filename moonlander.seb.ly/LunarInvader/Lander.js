@@ -103,17 +103,20 @@ Lander = function() {
 	//drop a bomb
 	this.shoot = function(){
 
-		if(missiles.length == 0){
-			missiles[0] = new Missile(vel.x, vel.y, pos.x, pos.y);
+		var tempMissile = new Missile(vel.x, vel.y, pos.x, pos.y);
+		missiles.push(tempMissile);
+
+		//if(missiles.length == 0){
+			//missiles[0] = new Missile(vel.x, vel.y, pos.x, pos.y);
 			
-		}else if(missiles.length == 1){
-			missiles[1] = new Missile(vel.x, vel.y, pos.x, pos.y);
-		}
+		//}else if(missiles.length == 1){
+			//missiles[1] = new Missile(vel.x, vel.y, pos.x, pos.y);
+		//}
 		
 		
 	}
 
-	this.update = function(times = 20) { 
+	this.update = function(times = 10) { 
 
 		this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
 		this.centerPos.y = (this.pos.y + this.bottomRight.y) / 2;

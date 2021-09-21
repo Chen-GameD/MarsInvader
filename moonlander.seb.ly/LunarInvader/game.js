@@ -40,6 +40,7 @@ var	WAITING = 0,
 	mouseBottom = 0,
 	
 	score = 0, 
+	shootConsumption = 50,
 	time = 0, 
 	
 	lander = new Lander(),
@@ -94,7 +95,13 @@ function init()
 	KeyTracker.addKeyDownListener(KeyTracker.UP, function() { if(gameState==PLAYING) {lander.isthrusting = true;lander.thrust(1);}});
 	KeyTracker.addKeyUpListener(KeyTracker.UP, function() {lander.isthrusting = false; lander.thrust(0);});
 	
-	KeyTracker.addKeyDownListener(KeyTracker.DOWN, function() { if(gameState==PLAYING) lander.shoot();});
+	KeyTracker.addKeyDownListener(KeyTracker.DOWN, function() {
+		 if(gameState==PLAYING && score >= shootConsumption) 
+		 {
+			 lander.shoot();
+			 score -= shootConsumption;
+		 }
+		});
 	
 	
 
@@ -233,7 +240,7 @@ function checkKeys() {
 	// SPEED MODE! 
 	if(KeyTracker.isKeyDown('S')) { 
 		//for(var i=0; i<3;i++){
-			lander.update(3);
+			lander.update(20);
 		//} 
 	}
 	
@@ -285,7 +292,7 @@ function setLanded(line) {
 	lander.land(); 
 	
 	var points = 0; 
-	if(lander.vel.y<0.075) { 
+	if(lander.vel.y<0.75) { 
 		points = 50 * multiplier; 
 		// show message - "a perfect landing"; 
 		infoDisplay.showGameInfo("CONGRATULATIONS<br>A PERFECT LANDING\n" + points + " POINTS");
@@ -379,7 +386,7 @@ function newGame() {
 	lander.fuel = 1000;
 
 	time = 0;
-	score = 0;
+	score = 1000;
 	
 	gameStartTime = Date.now(); 
 	counter = 0; 
@@ -442,7 +449,7 @@ function checkCollisions() {
 						//console.log('lander within line', lander.rotation, lander.vel.y);
 						// and we're horizontal and moving slowly
 						console.log("velocity:"+lander.vel.y);	
-						if((lander.rotation==0) && (lander.vel.y<0.15)) {
+						if((lander.rotation==0) && (lander.vel.y<1.5)) {
 							
 							//console.log('horizontal and slow');
 							setLanded(line);

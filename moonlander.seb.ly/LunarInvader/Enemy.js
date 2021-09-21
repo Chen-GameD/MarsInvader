@@ -13,7 +13,7 @@ Enemy = function(posX, posY){
     timer = 0;
     this.width = 10;
 
-    this.shootInterval = 2000;
+    this.shootInterval = 3000;
     this.currentInterval = Date.now();
     this.packages = [];
     this.packageActive = true;
