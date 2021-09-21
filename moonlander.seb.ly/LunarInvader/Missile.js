@@ -55,7 +55,7 @@ Missile = function(velX, velY, posX, posY){
    
     this.crash = function(){
         this.active = false;
-        boomEffects[boomLength++] = new BoomEffect(pos);
+        boomEffects[boomLength++] = new BoomEffect(pos, 1);
         
     };
 };

@@ -85,6 +85,7 @@ Enemy = function(posX, posY){
         for (var i = 0; i < this.packages.length; i++)
         {
             this.packages[i].update();
+            if(this.packages[i].active)
             this.packages[i].render(c);
         }
     };

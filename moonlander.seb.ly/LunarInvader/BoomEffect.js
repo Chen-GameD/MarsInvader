@@ -1,15 +1,22 @@
 
-BoomEffect= function(inPos){
+BoomEffect= function(inPos, music){
 
     var pictures = [];
     var offset = 0,
         pos = inPos;
     this.active = true;
-    var audio= new Audio("/assets/Music/Boom.mp3");
+
+    var audio= new Audio();
+    switch(music){
+        case 1:audio.src = "assets/Music/Boom.mp3";break;
+        case 2:audio.src = "assets/Music/Failure.mp3";
+    }
+    
+    audio.volume = 0.3;
     audio.play();
     for(i = 0; i < 30; i++){
         pictures[i] = new Image();
-        pictures[i].src =  "Assets/Effect/ExPlosion/sequence/Explosion"+(i+1)+".png";
+        pictures[i].src =  "assets/Effect/ExPlosion/sequence/Explosion"+(i+1)+".png";
 
     }
    

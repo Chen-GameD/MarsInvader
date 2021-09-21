@@ -223,7 +223,7 @@ Lander = function() {
 		 
 	};
 	this.crash = function () { 
-		boomEffects[boomLength++] = new BoomEffect(lander.pos);
+		boomEffects[boomLength++] = new BoomEffect(lander.pos, 2);
 		this.rotation = targetRotation = 0; 
 		this.active = false; 
 		exploding = true; 

@@ -287,6 +287,9 @@ function updateView()
 
 function setLanded(line) { 
 	
+	var audio = new Audio("assets/Music/Success.mp3");
+	audio.volume = 0.3;
+	audio.play();
 	multiplier = line.multiplier; 
 
 	lander.land(); 
@@ -507,8 +510,9 @@ function checkCollisions() {
 				//console.log(lander.width, landscape.enemy[i].packages[j].width);
 				if (Math.sqrt(Math.pow((lander.centerPos.x - landscape.enemy[i].packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - landscape.enemy[i].packages[j].centerPos.y), 2)) <= (lander.width + landscape.enemy[i].packages[j].width))
 				{
-
+					landscape.enemy[i].packages[j].active = false;
 					console.log(5);
+					
 					setCrashed();
 
 				}
