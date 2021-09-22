@@ -511,28 +511,32 @@ function checkCollisions() {
 		}
 	}
 	
-	//check package
-	for (var i = 0; i < landscape.enemy.length; i++)
+	if (gameState == PLAYING)
 	{
-		if (landscape.enemy[i].active)
+		//check package
+		for (var i = 0; i < landscape.enemy.length; i++)
 		{
-			var _enm = landscape.enemy[i];
-			for (var j = 0; j < landscape.enemy[i].packages.length; j++)
+			if (landscape.enemy[i].active)
 			{
-				
-				
-				if (Math.sqrt(Math.pow((lander.centerPos.x - _enm.packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - _enm.packages[j].centerPos.y), 2)) <= (lander.width + _enm.packages[j].width))
+				var _enm = landscape.enemy[i];
+				for (var j = 0; j < landscape.enemy[i].packages.length; j++)
 				{
-					_enm.packages[j].active = false;
-					console.log(5);
+				
+				
+					if (Math.sqrt(Math.pow((lander.centerPos.x - _enm.packages[j].centerPos.x), 2) + Math.pow((lander.centerPos.y - _enm.packages[j].centerPos.y), 2)) <= (lander.width + _enm.packages[j].width))
+					{
+						_enm.packages[j].active = false;
+						console.log(5);
 					
-					setCrashed();
+						setCrashed();
 
+					}
 				}
 			}
-		}
 		
+		}
 	}
+	
 	
 };
 
