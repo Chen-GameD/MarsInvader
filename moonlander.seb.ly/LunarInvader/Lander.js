@@ -100,26 +100,11 @@ Lander = function() {
 			lastAbort = now; 
 		} 
 	}
+
 	//drop a bomb
 	this.shoot = function(){
-		
-		var t = Date.now();
-	
-		if(t>0&&t-this.time<1000){
-			return;
-		}
-		this.time = t;
 		var tempMissile = new Missile(vel.x, vel.y, pos.x, pos.y);
 		missiles.push(tempMissile);
-
-		//if(missiles.length == 0){
-			//missiles[0] = new Missile(vel.x, vel.y, pos.x, pos.y);
-			
-		//}else if(missiles.length == 1){
-			//missiles[1] = new Missile(vel.x, vel.y, pos.x, pos.y);
-		//}
-		
-		
 	}
 
 	this.update = function(times = 10) { 

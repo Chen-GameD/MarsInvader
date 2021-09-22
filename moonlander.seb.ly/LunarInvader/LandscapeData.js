@@ -116,7 +116,8 @@ function Landscape(){
 					document.body.appendChild(infoBox.domElement); 
 				} else {
 					infoBox = zoneInfos[zoneInfoIndex]; 
-					infoBox.show(); 
+					if (offset == 0)
+						infoBox.show(); 
 				}
 				infoBox.setText(line.multiplier+'x'); 
 				infoBox.setX(((((line.p2.x-line.p1.x)/2)+line.p1.x+offset)*view.scale)+view.x); 
@@ -124,6 +125,8 @@ function Landscape(){
 				zoneInfoIndex++; 
 				
 			}
+
+			
 			
 			i++; 
 			if(i>=lines.length) {
@@ -231,12 +234,15 @@ function Landscape(){
 			line.multiplier = zone.multiplier;
 
 			//enemy
-			if (zonenumber == enemyCombis[currentCombi])
+			for (var j = 0; j < enemyCombis[currentCombi].length; j++)
 			{
-				//CreateEnemy
-				var tempE = new Enemy((line.p2.x + line.p1.x) / 2, line.p1.y);
-				this.enemy.push(tempE);
-				line.multiplier *= enemyMultiplier;
+				if (zonenumber == enemyCombis[currentCombi][j])
+				{
+					//CreateEnemy
+					var tempE = new Enemy((line.p2.x + line.p1.x) / 2, line.p1.y);
+					this.enemy.push(tempE);
+					line.multiplier *= enemyMultiplier;
+				}
 			}
 
 		}
@@ -425,22 +431,22 @@ function Landscape(){
 		availableZones.push(new LandingZone(148, 3));	
 		
 			
-		zoneCombis.push([2,3,7,9]);
-		zoneCombis.push([7,8,9,10]);
-		zoneCombis.push([2,3,7,9]);
-		zoneCombis.push([1,4,7,9]);
-		zoneCombis.push([0,5,7,9]);
-		zoneCombis.push([6,7,8,9]);
-		zoneCombis.push([1,4,7,9]);	
+		zoneCombis.push([2,3,4,5,7,9]);
+		zoneCombis.push([1,3,7,8,9,10]);
+		zoneCombis.push([1,2,3,5,7,9]);
+		zoneCombis.push([1,2,4,6,7,9]);
+		zoneCombis.push([0,2,4,5,7,9]);
+		zoneCombis.push([0,4,6,7,8,9]);
+		zoneCombis.push([1,4,5,7,9,10]);	
 	
 		
-		enemyCombis.push(3);
-		enemyCombis.push(8);
-		enemyCombis.push(3);
-		enemyCombis.push(4);
-		enemyCombis.push(5);
-		enemyCombis.push(7);
-		enemyCombis.push(4);
+		enemyCombis.push([3, 9]);
+		enemyCombis.push([8, 10]);
+		enemyCombis.push([3, 9]);
+		enemyCombis.push([4, 9]);
+		enemyCombis.push([5, 9]);
+		enemyCombis.push([7, 9]);
+		enemyCombis.push([4, 9]);
 		
 		
 	}

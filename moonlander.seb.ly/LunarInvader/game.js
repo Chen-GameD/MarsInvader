@@ -98,8 +98,15 @@ function init()
 	KeyTracker.addKeyDownListener(KeyTracker.DOWN, function() {
 		 if(gameState==PLAYING && score >= shootConsumption) 
 		 {
-			 lander.shoot();
-			 score -= shootConsumption;
+			var t = Date.now();
+	
+			if(t > 0 && t - this.timeShoot<1000){
+				return;
+			}
+			this.timeShoot = t;
+
+			lander.shoot();
+			score -= shootConsumption;
 		 }
 		});
 	
@@ -489,7 +496,7 @@ function checkCollisions() {
 			var missile = missiles[j];
 			if(missile.active){
 				
-				if(missile.pos.x+0>line.p1.x && missile.pos.x+0 < line.p2.x){
+				if(missile.pos.x % landscape.tileWidth >line.p1.x && missile.pos.x % landscape.tileWidth < line.p2.x){
 					if(missile.pos.y > line.p1.y || missile.pos.y> line.p2.y){
 						//boom
 						missile.crash();
