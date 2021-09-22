@@ -1,5 +1,8 @@
 
 // screen size variables
+var bgm = new Audio("assets/Music/Background.wav");
+	bgm.volume = 0.3;
+	bgm.loop = true;
 var SCREEN_WIDTH = window.innerWidth,
 	SCREEN_HEIGHT = window.innerHeight,
 	HALF_WIDTH = window.innerWidth / 2,
@@ -33,6 +36,7 @@ var	WAITING = 0,
 	LANDED = 2, 
 	CRASHED = 3, 
 	GAMEOVER = 4,
+	STARTING = 5,
 	
 	gameState = GAMEOVER, 
 	mouseThrust = false, 
@@ -386,6 +390,7 @@ function onTouchStart(e) {
 
 function newGame() { 
 	
+	bgm.play();
 	lander.fuel = 1000;
 
 	time = 0;
