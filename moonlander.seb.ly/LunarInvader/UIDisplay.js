@@ -29,10 +29,14 @@ function UIDisplay(width, height) {
 		alt = this.alt = makeInfoBox("000", RIGHT),
 		horizSpeed = this.horizSpeed = makeInfoBox("000", RIGHT),
 		vertSpeed = this.vertSpeed = makeInfoBox("000", RIGHT), 
+
+		startMessages = this.startMessages = makeInfoBox("Starting", CENTRE, 300) ;
+		startMessages.domElement.className = "titleBox";
+        this.startMessages.hide();
 		
 		messages = this.messages = makeInfoBox("TEST", CENTRE, 300) ;
 		messages.domElement.className = "titleBox";
-		  
+		
 	this.arrangeBoxes = arrangeBoxes; 
 	
 	
@@ -102,6 +106,9 @@ function UIDisplay(width, height) {
 		messages.setX(width/2); 
 		messages.setY(((height-topMargin)/4)+topMargin); 
 		
+		startMessages.setX(width/2); 
+		startMessages.setY(((height-topMargin)/4)+topMargin); 
+
 		document.body.style.fontSize = '50%'; 
 		
 		
@@ -118,6 +125,54 @@ function UIDisplay(width, height) {
 		messages.setText(''); 
 		messages.hide(); 
 		
+	};
+
+	this.hideAll = function(){
+		scoreLabel.hide();
+		timeLabel.hide();
+		fuelLabel.hide();
+		score.hide();
+		time.hide();
+		fuel.hide();
+		
+		altLabel.hide();
+		horizSpeedLabel.hide();
+		vertSpeedLabel.hide();
+		
+		alt.hide();
+		horizSpeed.hide();
+		vertSpeed.hide();
+
+		this.messages.hide();
+		
+	};
+	this.showAll = function(){
+		scoreLabel.show();
+		timeLabel.show();
+		fuelLabel.show();
+		score.show();
+		time.show();
+		fuel.show();
+		
+		altLabel.show();
+		horizSpeedLabel.show();
+		vertSpeedLabel.show();
+		
+		alt.show();
+		horizSpeed.show();
+		vertSpeed.show();
+
+		messages.show();
+		
+	}
+
+	this.showStarMessage = function(msg){
+		this.startMessages.show();
+		this.startMessages.setText(msg);
+	};
+
+	this.hideStartMessage = function(){
+		this.startMessages.hide();
 	};
 	
 	this.updateBoxInt = function(boxname, value, padding) { 
