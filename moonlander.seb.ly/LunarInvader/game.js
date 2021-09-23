@@ -26,15 +26,20 @@ var SCREEN_WIDTH = window.innerWidth,
 	lastMouseMove = Date.now(), 
 	lastMouseHide =0, 
 	mouseHidden = false; 
-
+	var pic1 = new Image();
+	pic1.src = "assets/Portrait/elonmusk.png";
+	var pic2 = new Image();
+	pic2.src = "assets/Portrait/jeff bezos.png";
+    var bg = new Image();
+	bg.src = "assets/Portrait/Start.png";
 // game states
 var	WAITING = 0, 
 	PLAYING = 1, 
 	LANDED = 2, 
 	CRASHED = 3, 
 	GAMEOVER = 4,
-	
-	gameState = GAMEOVER, 
+	STARTING = 5,
+	gameState = STARTING, 
 	mouseThrust = false, 
 	mouseTop = 0, 
 	mouseBottom = 0,
@@ -42,7 +47,7 @@ var	WAITING = 0,
 	score = 0, 
 	shootConsumption = 50,
 	time = 0, 
-	
+	startTime = 0,
 	lander = new Lander(),
 	landscape = new Landscape(), 
 	testPoints = [],
@@ -109,15 +114,27 @@ function init()
 	window.addEventListener('orientationchange', resizeGame);
 	
 	resizeGame();
-	restartLevel(); 
-	
+	//restartLevel(); 
+	startTime = Date.now();
 	loop();
 	
 }
 	
+
 function loop() {
 	requestAnimationFrame(loop);
 
+	if(gameState==STARTING){
+		infoDisplay.hideAll();
+		
+		renderStart();
+		
+		if(Date.now() - startTime >= 7000){
+			gameState = GAMEOVER;
+			restartLevel();
+		}
+	}
+	else{
 	skippedFrames = 0; 
 		
 	counter++; 
@@ -186,6 +203,23 @@ function loop() {
 		lastMouseHide = Date.now();
 		mouseHidden = true; 
 	}
+}
+}
+function renderStart() { 
+
+	var c = context; 
+	SCREEN_WIDTH = window.innerWidth; 
+	SCREEN_HEIGHT = window.innerHeight; 
+	c.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	
+	c.save(); 
+	c.translate(view.x, view.y); 
+	c.scale(1, 1); 
+
+    c.drawImage(bg, SCREEN_WIDTH/2-500,SCREEN_HEIGHT/2-400,1000,800);
+    c.drawImage(pic1,  SCREEN_WIDTH/2-600,SCREEN_HEIGHT/2, 300,300);
+	c.drawImage(pic2,  SCREEN_WIDTH/2+300,SCREEN_HEIGHT/2, 300,300);
+	c.restore();
 }
 
 function render() { 
