@@ -24,7 +24,7 @@ var SCREEN_WIDTH = window.innerWidth,
 	startKey = ' ',
 	selectKey = '', 
 	abortKey = '',
-	startMessage = "Welcome to Mars Invader<br><br>CLICK TO PLAY<br>ARROW KEYS TO MOVE", 
+	startMessage = "Welcome to Mars Invader<br><br>CLICK TO PLAY<br>← → TO MOVE<br>↑ TO THRUST<br>↓ TO THROW CAR", 
 	singlePlayMode = false, // for arcade machine  
 	lastMouseMove = Date.now(), 
 	lastMouseHide =0, 
@@ -261,7 +261,11 @@ function render() {
 			boomEffects[i].render(context);
 		}
 	}
-	if(counter%4==0) updateTextInfo(); 
+
+	console.log(counter);
+	
+		updateTextInfo(); 
+	
 	
 	c.restore();
 }
@@ -346,7 +350,7 @@ function setLanded(line) {
 		points = 50 * multiplier; 
 		// show message - "a perfect landing"; 
 		infoDisplay.showGameInfo("CONGRATULATIONS<br>A PERFECT LANDING\n" + points + " POINTS");
-		lander.fuel+=50;
+		lander.fuel+=50 * multiplier;
 	} else {
 		points = 15 * multiplier; 
 		// YOU LANDED HARD

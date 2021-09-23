@@ -28,6 +28,7 @@ Lander = function() {
 	this.width = 0;
 	this.altitude = 0;
 	this.active = true; 
+	this.landed = false;
 	this.fuel = 0; 
 	this.scale = 0.8; 
 	this.left = 0; 
@@ -52,6 +53,7 @@ Lander = function() {
 		thrustBuild = 0; 
 		bouncing = 0; 
 		this.active = true; 
+		this.landed = false;
 		exploding = false; 
 		for(var i=0; i<shapePos.length; i++) { 
 			shapePos[i].reset(0,0); 
@@ -109,66 +111,70 @@ Lander = function() {
 
 	this.update = function(times = 10) { 
 
-		this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
-		this.centerPos.y = (this.pos.y + this.bottomRight.y) / 2;
-		this.width = Math.abs(this.pos.x - this.bottomRight.x);
-	
-		counter++; 
+		if (!this.landed)
+		{
+			this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
+			this.centerPos.y = (this.pos.y + this.bottomRight.y) / 2;
+			this.width = Math.abs(this.pos.x - this.bottomRight.x);
 		
-		this.rotation += (	targetRotation-this.rotation)*0.3;
-		if(Math.abs(this.rotation-targetRotation)<0.1) this.rotation = targetRotation; 
-		
-		if(exploding) this.updateShapesAnimation(); 
-		
-		if(this.active) { 
+			counter++; 
 			
-			if(abortCounter>-1) { 
-				 
-				targetRotation = 0; 
+			this.rotation += (	targetRotation-this.rotation)*0.3;
+			if(Math.abs(this.rotation-targetRotation)<0.1) this.rotation = targetRotation; 
+			
+			if(exploding) this.updateShapesAnimation(); 
+			
+			if(this.active) { 
+				
+				if(abortCounter>-1) { 
+					 
+					targetRotation = 0; 
+						
 					
+					if(this.fuel>0) thrustBuild = 3; 
+					abortCounter --; 
+					this.fuel-=2; 
+					
+				}
 				
-				if(this.fuel>0) thrustBuild = 3; 
-				abortCounter --; 
-				this.fuel-=1; 
-				
-			}
+				if(this.fuel<=0) this.thrusting = 0; 
 			
-			if(this.fuel<=0) this.thrusting = 0; 
-		
-			thrustBuild += ((this.thrusting-thrustBuild)*0.2);
-		
-			if(thrustBuild>0) { 
-
-
-				thrustVec.reset(0,-thrustAcceleration*thrustBuild*times); 
-
-				thrustVec.rotate(this.rotation); 
-				vel.plusEq(thrustVec); 
-				this.fuel -= (0.2 * thrustBuild);
-			}
+				thrustBuild += ((this.thrusting-thrustBuild)*0.2);
+			
+				if(thrustBuild>0) { 
 	
-			pos.plusEq(vel); 
-			vel.x*=drag; 
-			vel.y+=gravity*12; 
-			if(vel.y>topSpeed) velY=topSpeed; 
-			else if (vel.y<-topSpeed) velY=-topSpeed; 
+	
+					thrustVec.reset(0,-thrustAcceleration*thrustBuild*times); 
+	
+					thrustVec.rotate(this.rotation); 
+					vel.plusEq(thrustVec); 
+					this.fuel -= (0.4 * thrustBuild);
+				}
 		
-			this.left = pos.x-(10*this.scale); 
-			this.right = pos.x+(10*this.scale); 
-			this.bottom = pos.y+(14*this.scale); 
-			this.top = pos.y-(5*this.scale); 
-			bottomLeft.reset(this.left, this.bottom); 
-			bottomRight.reset(this.right, this.bottom); 
+				pos.plusEq(vel); 
+				vel.x*=drag; 
+				vel.y+=gravity*12; 
+				if(vel.y>topSpeed) velY=topSpeed; 
+				else if (vel.y<-topSpeed) velY=-topSpeed; 
 			
-		} else if (bouncing>0) {
+				this.left = pos.x-(10*this.scale); 
+				this.right = pos.x+(10*this.scale); 
+				this.bottom = pos.y+(14*this.scale); 
+				this.top = pos.y-(5*this.scale); 
+				bottomLeft.reset(this.left, this.bottom); 
+				bottomRight.reset(this.right, this.bottom); 
+				
+			} else if (bouncing>0) {
+				
+				pos.y  += Math.sin(bouncing)*0.07; 
+				bouncing -= Math.PI / 20;
+				
+			}
+			if(this.fuel<0) this.fuel = 0; 
 			
-			pos.y  += Math.sin(bouncing)*0.07; 
-			bouncing -= Math.PI / 20;
-			
+			this.thrustLevel = thrustBuild;
 		}
-		if(this.fuel<0) this.fuel = 0; 
 		
-		this.thrustLevel = thrustBuild;
 		
 	};
 	
@@ -222,7 +228,7 @@ Lander = function() {
 		
 	};
 	this.land = function () { 
-		this.active  =false; 
+		this.landed = true;
 		thrustBuild = 0; 
 	};
 	this.makeBounce = function() { 
