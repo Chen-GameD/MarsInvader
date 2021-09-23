@@ -143,6 +143,7 @@ function loop() {
 		
 		if(Date.now() - startTime >= 7000){
 			gameState = GAMEOVER;
+			infoDisplay.showAll();
 			restartLevel();
 		}
 	}
