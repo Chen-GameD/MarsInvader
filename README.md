@@ -7,7 +7,7 @@ Engineer: Mingyuan Chen\Ruijia Huang
 TA: Zihe Xue
 
 ## Contact
-Ben Crosby: 
+Ben Crosby: bencrosby117@gmail.com
 Xiaofan Gu: guxiaofanapply@hotmail.com
 Mingyuan Chen: chen.my.gamed@gmail.com
 Ruijia Huang: Ruijia_huang1025@163.com
