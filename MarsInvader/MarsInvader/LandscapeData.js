@@ -23,7 +23,7 @@ function Landscape(){
 
 	var maxRanderHeight = 720;
 	const tile = new Image();
-	tile.src = "Assets/MarsGround.png";
+	tile.src = "assets/MarsGround.png";
 	var tile_width = 0;
 	var imageLoadSuccess = false;
 	var tile_height = 0;
