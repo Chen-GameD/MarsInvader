@@ -16,7 +16,7 @@ BoomEffect= function(inPos, music){
     audio.play();
     for(i = 0; i < 30; i++){
         pictures[i] = new Image();
-        pictures[i].src =  "assets/Effect/ExPlosion/sequence/Explosion"+(i+1)+".png";
+        pictures[i].src =  "assets/Effect/Explosion"+(i+1)+".png";
 
     }
    
