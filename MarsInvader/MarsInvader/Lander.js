@@ -20,9 +20,9 @@ Lander = function() {
 		abortCounter = -1;  
 	this.isthrusting = false;
 	this.socketImg = new Image();
-	this.socketImg.src="Assets/SpaceXShuttle/SpaceXShuttle.png";
+	this.socketImg.src="assets/SpaceXShuttle/SpaceXShuttle.png";
 	this.socket_noflameImg = new Image();
-	this.socket_noflameImg.src = "Assets/SpaceXShuttle/SpaceXShuttle_noflame.png"
+	this.socket_noflameImg.src = "assets/SpaceXShuttle/SpaceXShuttle_noflame.png"
 
 	var imageLoadSuccess = false;
 	var imageLoadSuccessNo = false;
@@ -76,7 +76,7 @@ Lander = function() {
 	reset(); 
 	for(i = 0; i < 30; i++){
 		this.flameImg[i] = new Image();
-		this.flameImg[i].src =  "Assets/SpaceXShuttle/Animation type2/SpaceXShuttle"+(i+1)+".png";
+		this.flameImg[i].src =  "assets/SpaceXShuttle/AnimationType2/SpaceXShuttle"+(i+1)+".png";
 	}
 
 	

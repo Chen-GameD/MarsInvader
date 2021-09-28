@@ -8,7 +8,7 @@ Missile = function(velX, velY, posX, posY){
     this.scale = 0.25;
     this.active = true;
     this.missileImg = new Image();
-	this.missileImg.src="Assets/Car/car.png";
+	this.missileImg.src="assets/Car/car.png";
 
     if(view.scale == SCREEN_HEIGHT/700){
         this.scale = 0.6;
