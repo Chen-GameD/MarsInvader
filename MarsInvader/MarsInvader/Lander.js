@@ -23,6 +23,17 @@ Lander = function() {
 	this.socketImg.src="Assets/SpaceXShuttle/SpaceXShuttle.png";
 	this.socket_noflameImg = new Image();
 	this.socket_noflameImg.src = "Assets/SpaceXShuttle/SpaceXShuttle_noflame.png"
+
+	var imageLoadSuccess = false;
+	var imageLoadSuccessNo = false;
+
+	this.socketImg.onload = function(){
+		imageLoadSuccess = true;
+	}
+	this.socket_noflameImg.onload = function(){
+		imageLoadSuccessNo = true;
+	}
+
 	this.rotation = 0; 
 	this.thrusting = 0;
 	this.width = 0;
@@ -111,6 +122,9 @@ Lander = function() {
 
 	this.update = function(times = 10) { 
 
+		if (!imageLoadSuccess || !imageLoadSuccessNo)
+			return;
+
 		if (!this.landed)
 		{
 			this.centerPos.x = (this.pos.x + this.bottomRight.x) / 2;
@@ -179,6 +193,10 @@ Lander = function() {
 	};
 	
 	this.render = function(c, scale) { 
+
+		if (!imageLoadSuccess || !imageLoadSuccessNo)
+			return;
+
 		c.save(); 
 		
 		

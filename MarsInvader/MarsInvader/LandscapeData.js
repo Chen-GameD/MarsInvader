@@ -25,12 +25,12 @@ function Landscape(){
 	const tile = new Image();
 	tile.src = "Assets/MarsGround.png";
 	var tile_width = 0;
+	var imageLoadSuccess = false;
 	var tile_height = 0;
 	tile.onload = function(){
-	//	console.log(tile.width);
 		tile_width = points[points.length - 1].x - points[0].x;
 		tile_height = tile.height * (tile_width / tile.width);
-
+		imageLoadSuccess = true;
 	}
 	
 
@@ -66,6 +66,9 @@ function Landscape(){
 	}
 	
 	var render = this.render = function(c, view, playerPos) { 
+
+		if (!imageLoadSuccess)
+			return;
 
 		var offset = 0; 
 		
