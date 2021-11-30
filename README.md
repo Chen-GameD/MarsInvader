@@ -1,4 +1,4 @@
-# Rapid_Prototyping_T2_lunarLander
+# MarsInvader
 This game supplies a buzz for kinetic players, as the shuttle flies over a sprawling landscape, dropping cars at its same velocity onto hostile turrets. The cherry on top is a relaxing, gentle victory landing.
 
 ## Developer
